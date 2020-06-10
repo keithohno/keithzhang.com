@@ -7,12 +7,6 @@
     </p>
     <p>
       <strong>
-        <router-link to="/life">Life+</router-link>
-      </strong>
-      - Celluar automaton based on Conway's Game of Life.
-    </p>
-    <p>
-      <strong>
         <router-link to="/experiments">Experiments</router-link>
       </strong>
       - idk.
