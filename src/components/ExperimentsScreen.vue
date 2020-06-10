@@ -4,7 +4,14 @@
     <canvas id="sandbox" class="box large-box"></canvas>
     <div class="button-container">
       <button type="button" id="pause-play">Play</button>
-      <input type="range" min="1" max="10" value="1" class="slider" id="speed" />
+      <input
+        type="range"
+        min="1"
+        max="10"
+        value="1"
+        class="slider"
+        id="speed"
+      />
     </div>
     <div class="box large-box text-box">
       <p>
@@ -104,7 +111,7 @@ export default {
         DORMANT: 3,
         LIGHT: 4,
         DARK: 5,
-        FLUX: 6
+        FLUX: 6,
       });
 
       // Array representing the "Moore neighborhood" (the 8 cells surrounding a cell)
@@ -116,7 +123,7 @@ export default {
         [0, 1],
         [1, -1],
         [1, 0],
-        [1, 1]
+        [1, 1],
       ];
 
       var Life = {};
@@ -153,7 +160,7 @@ export default {
           [b, b - 1],
           [b + 1, b],
           [b + 2, b],
-          [b + 3, b]
+          [b + 3, b],
         ];
         writeCells(Life, seed, Cell.NORMAL);
 
@@ -332,8 +339,8 @@ export default {
         var cellArray = [...Array(size)].map(() => Array(size).fill(Cell.DEAD));
         return cellArray;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
