@@ -6,8 +6,8 @@
       website is very much a work in progress haha.
     </p>
     <p>
-      <a href="keithzhang.com/algoshow">Algoshow</a> - Experimental Demo for
-      common CS algorithms
+      <a href="/algoshow">Algoshow</a> - Experimental Demo for common CS
+      algorithms
     </p>
     <p>
       <strong>
