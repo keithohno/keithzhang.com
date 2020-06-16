@@ -6,6 +6,10 @@
       website is very much a work in progress haha.
     </p>
     <p>
+      <a href="keithzhang.com/algoshow">Algoshow</a> - Experimental Demo for
+      common CS algorithms
+    </p>
+    <p>
       <strong>
         <router-link to="/experiments">Experiments</router-link>
       </strong>
