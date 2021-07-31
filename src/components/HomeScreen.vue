@@ -6,20 +6,22 @@
       website is very much a work in progress haha.
     </p>
     <p>
-      <a href="/algoshow">Algoshow</a> - Experimental Demo for common CS
-      algorithms
+      <strong>
+        <a href="/dinner">WhatsForDinner</a>
+      </strong>
+      (WIP) - a recipe app built using Vue, Flask, and MongoDB.
     </p>
     <p>
       <strong>
         <router-link to="/experiments">Experiments</router-link>
       </strong>
-      - idk.
+      - a couple small projects.
     </p>
   </div>
 </template>
 
 <script>
 export default {
-  name: "HomeScreen",
+  name: "HomeScreen"
 };
 </script>
