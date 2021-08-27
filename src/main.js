@@ -1,22 +1,7 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
+import { createApp } from "vue";
 import App from "./App.vue";
-import HomeScreen from "./components/HomeScreen";
-import ExperimentsScreen from "./components/ExperimentsScreen";
-import LifeScreen from "./components/LifeScreen";
+import router from "./router";
 
-Vue.config.productionTip = false;
-Vue.use(VueRouter);
-
-const routes = [
-  { path: "/", component: HomeScreen },
-  { path: "/experiments", component: ExperimentsScreen },
-  { path: "/life", component: LifeScreen },
-];
-
-const router = new VueRouter({ mode: "history", routes });
-
-new Vue({
-  router,
-  render: (h) => h(App),
-}).$mount("#app");
+createApp(App)
+  .use(router)
+  .mount("#app");
