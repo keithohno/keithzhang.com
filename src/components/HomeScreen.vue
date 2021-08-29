@@ -18,10 +18,21 @@
       - a couple small projects.
     </p>
   </div>
+  <Skyfield />
 </template>
 
 <script>
+import Skyfield from "./skyfield/Skyfield.vue";
 export default {
-  name: "HomeScreen"
+  name: "HomeScreen",
+  components: {
+    Skyfield,
+  },
 };
 </script>
+
+<style scoped>
+* {
+  color: #d9d9d9;
+}
+</style>
