@@ -54,6 +54,9 @@ export default {
     },
     generate_all() {
       if (this.x_min > -1) {
+        if (this.x_min > document.documentElement.scrollWidth) {
+          this.x_min = document.documentElement.scrollWidth;
+        }
         for (let i = 0; i * 50 < document.documentElement.scrollHeight; i++) {
           this.generate(this.x_min - 20, 50 * i);
         }
