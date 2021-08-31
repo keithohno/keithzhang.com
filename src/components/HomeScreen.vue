@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <h1>Keith Zhang</h1>
+  <div class="d-flex align-items-center flex-column">
+    <h1 class="keithzhang">KEITH ZHANG</h1>
+    <img src="../../public/ME.png" class="portrait" />
     <p>
       Hi I'm Keith. I'm still figuring out how all this stuff works, so the
       website is very much a work in progress haha.
@@ -32,7 +33,29 @@ export default {
 </script>
 
 <style scoped>
+@font-face {
+  font-family: "KoHo";
+  src: url("../../public/fonts/koho.woff") format("woff"),
+    url("../../public/fonts/koho.woff2") format("woff2");
+}
 * {
-  color: #d9d9d9;
+  color: #ddeeff;
+}
+.keithzhang {
+  margin-top: 45px;
+}
+.portrait {
+  margin-top: 20px;
+  max-width: 160px;
+  margin-bottom: 40px;
+}
+h1 {
+  font-family: KoHo;
+  font-size: 96px;
+  font-weight: 600;
+  letter-spacing: 10px;
+}
+html {
+  scroll-behavior: smooth;
 }
 </style>

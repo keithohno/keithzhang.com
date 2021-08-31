@@ -101,6 +101,6 @@ export default {
   left: 0;
   top: 0;
   z-index: -10;
-  background-color: #192236;
+  background-image: linear-gradient(#161a28, #1a2840);
 }
 </style>
