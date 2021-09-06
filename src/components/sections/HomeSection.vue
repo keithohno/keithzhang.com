@@ -32,7 +32,7 @@ export default {
 }
 h1 {
   font-family: KoHo;
-  font-size: 96px;
+  font-size: calc(50px + 5vw);
   font-weight: 600;
   text-align: center;
   letter-spacing: 10px;

@@ -26,6 +26,7 @@ export default {
 }
 nav {
   position: fixed;
+  z-index: 10;
   top: 0px;
   left: 0px;
   width: 100%;
