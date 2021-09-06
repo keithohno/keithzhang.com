@@ -10,7 +10,7 @@
 import Skyfield from "./skyfield/Skyfield.vue";
 import Navbar from "./Navbar.vue";
 import HomeSection from "./sections/HomeSection.vue";
-import ProjectSection from "./sections/ProjectSection.vue";
+import ProjectSection from "./sections/ProjectSection/ProjectSection.vue";
 import ContactSection from "./sections/ContactSection.vue";
 export default {
   name: "HomeScreen",
