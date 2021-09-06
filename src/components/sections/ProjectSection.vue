@@ -4,7 +4,14 @@
       <strong>
         <a href="/dinner">WhatsForDinner</a>
       </strong>
-      (WIP) - a recipe app built using Vue, Flask, and MongoDB. KEITH ZHANG
+      (WIP) - a recipe app built using Vue, Flask, and MongoDB.
+    </p>
+    <p>
+      <strong>
+        <a href="https://github.com/keithohno/keithzhang.com">keithzhang.com</a>
+      </strong>
+      (WIP) - This website! Uses Vue on the front-end, and is automatically
+      deployed to a Google Cloud server with Ansible.
     </p>
     <p>
       <strong>
