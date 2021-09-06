@@ -8,16 +8,12 @@
           github="https://github.com/keithohno/WhatsForDinner"
           live="dinner"
         />
-      </div>
-      <div class="project-card-section">
         <ProjectCard
           desc="keithzhang.com (WIP) - this website! built with Vue, deployed with Ansible and Google Cloud."
           img="website.png"
           github="https://github.com/keithohno/keithzhang.com"
           live="#home-section"
         />
-      </div>
-      <div class="project-card-section">
         <ProjectCard
           desc="WhatsForDinner - (WIP) a small recipe app build using Vue, Flask, and MongoDB."
           img="experiments.png"
@@ -57,6 +53,7 @@ export default {
 }
 .project-card-section {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
 }

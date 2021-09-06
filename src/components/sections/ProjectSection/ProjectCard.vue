@@ -75,7 +75,6 @@ export default {
 }
 .project-card-link {
   background-color: rgb(22, 26, 40, 1);
-  opacity: 100%;
   border: 2px solid white;
   padding: 5px 9px;
   margin: 5px;
