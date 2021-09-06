@@ -10,7 +10,7 @@
           <a :href="github">Github</a>
         </div>
         <div class="project-card-link" v-if="live">
-          <a :href="live">Live</a>
+          <a :href="live">Link</a>
         </div>
       </div>
     </div>

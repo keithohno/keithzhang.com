@@ -1,5 +1,6 @@
 <template>
   <div id="project-section">
+    <h3>PROJECTS</h3>
     <div class="project-section-inner">
       <div class="project-card-section">
         <ProjectCard
@@ -15,7 +16,7 @@
           live="#home-section"
         />
         <ProjectCard
-          desc="WhatsForDinner - (WIP) a small recipe app build using Vue, Flask, and MongoDB."
+          desc="A few small graphical demos made with javascript."
           img="experiments.png"
           live="experiments"
         />
@@ -35,6 +36,14 @@ export default {
 </script>
 
 <style scoped>
+h3 {
+  font-family: KoHo;
+  font-size: calc(30px + 2vw);
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 10px;
+  color: #ddeeff;
+}
 #project-section {
   min-height: 105vh;
   padding-top: 70px;
