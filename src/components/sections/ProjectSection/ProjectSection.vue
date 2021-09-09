@@ -1,6 +1,6 @@
 <template>
-  <div id="project-section">
-    <h3>PROJECTS</h3>
+  <div class="d-flex align-items-center flex-column" id="project-section">
+    <h3 class="mb-4">PROJECTS</h3>
     <div class="project-section-inner">
       <div class="project-card-section">
         <ProjectCard
@@ -36,14 +36,6 @@ export default {
 </script>
 
 <style scoped>
-h3 {
-  font-family: KoHo;
-  font-size: calc(30px + 2vw);
-  font-weight: 600;
-  text-align: center;
-  letter-spacing: 10px;
-  color: #ddeeff;
-}
 #project-section {
   min-height: 105vh;
   padding-top: 70px;
@@ -52,7 +44,6 @@ h3 {
   background-color: #161a28;
 }
 .project-section-inner {
-  margin: auto;
   position: relative;
 }
 @media only screen and (min-width: 600px) {

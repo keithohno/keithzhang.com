@@ -33,4 +33,27 @@ export default {
 html {
   scroll-behavior: smooth;
 }
+::v-deep p {
+  color: #ddeeff;
+}
+::v-deep .my-text {
+  font-size: calc(12px + 1.2vw);
+}
+::v-deep h3 {
+  font-family: KoHo;
+  font-size: calc(20px + 3vw);
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: calc(3px + 1vw);
+  color: #ddeeff;
+  width: 85%;
+}
+::v-deep h1 {
+  font-family: KoHo;
+  font-size: calc(30px + 6vw);
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: calc(4px + 1.1vw);
+  width: 85%;
+}
 </style>
