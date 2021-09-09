@@ -43,6 +43,7 @@ export default {
   height: 300px;
   background-color: white;
   display: flex;
+  overflow: hidden;
 }
 .project-card-hover {
   z-index: 4;
@@ -50,16 +51,42 @@ export default {
   height: 300px;
   padding: 10px;
   position: absolute;
-  visibility: hidden;
-  background-color: rgb(22, 26, 40, 0.8);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: rgb(22, 26, 40, 0);
+  opacity: 0;
+  transition: 0.6s;
 }
+
+.project-card-hover > * {
+  opacity: 0;
+  transition: 0.6s;
+}
+
+.project-card-img {
+  transform: none;
+  transition: 0.8s;
+}
+
 .project-card:hover .project-card-hover,
 .project-card:active .project-card-hover {
-  visibility: visible;
+  background-color: rgb(22, 26, 40, 0.8);
+  opacity: 1;
+  transition: 0.6s;
+}
+
+.project-card:hover .project-card-hover > *,
+.project-card:active .project-card-hover > * {
+  opacity: 1;
+  transition: 0.6s;
+}
+
+.project-card:hover .project-card-img,
+.project-card:active .project-card-img {
+  transform: scale(1.1);
+  transition: 0.8s;
 }
 
 .project-card-desc {
