@@ -7,7 +7,7 @@
         :cx="obj.x"
         :cy="obj.y"
         :r="obj.radius"
-        fill="#FFF9B5"
+        :fill="obj.fill"
         :opacity="obj.opac"
       />
     </g>
@@ -71,18 +71,27 @@ export default {
     },
     generate(x_start, y_start) {
       let new_stars = [];
-      if (Math.random() > 0.95)
-        for (let i = 0; i < 1; i += 1) {
-          new_stars.push({
-            key: this.total,
-            x: x_start + this.randint(20),
-            y: y_start + this.randint(50),
-            radius: 2 + this.randint(2) + this.randint(2),
-            speed: 100 + this.randint(100),
-            opac: 0.2 + Math.random() * 0.4,
-          });
-          this.total += 1;
+      if (Math.random() > 0.96) {
+        let color_n = this.randint(7);
+        let color = "#FFFFFF";
+        if (color_n == 6) {
+          color = "#FFC5A2";
+        } else if (color_n >= 4) {
+          color = "#E6E6FF";
+        } else if (color_n >= 2) {
+          color = "#FFF9B5";
         }
+        new_stars.push({
+          key: this.total,
+          x: x_start + this.randint(20),
+          y: y_start + this.randint(50),
+          radius: 1 + this.randint(3) + this.randint(2),
+          speed: 50 + this.randint(50),
+          fill: color,
+          opac: 0.2 + Math.random() * 0.4,
+        });
+        this.total += 1;
+      }
       this.objs.push(...new_stars);
     },
   },

@@ -1,7 +1,20 @@
 <template>
   <div class="d-flex align-items-center flex-column" id="home-section">
     <h1>KEITH ZHANG</h1>
-    <img src="../../../public/ME.png" class="portrait" />
+    <div class="portrait-box">
+      <img
+        src="../../../public/ME.png"
+        v-if="!moon"
+        class="portrait"
+        @click="toggle_moon"
+      />
+      <img
+        src="../../../public/moon.png"
+        v-if="moon"
+        class="portrait-moon"
+        @click="toggle_moon"
+      />
+    </div>
     <p class="my-text">
       Hi, I'm Keith! I'm <span class="small-text">(almost!)</span> a
       <span class="yellow-text">computer science</span> graduate, looking to
@@ -20,6 +33,16 @@
 <script>
 export default {
   name: "HomeSection",
+  data: function () {
+    return {
+      moon: Boolean,
+    };
+  },
+  methods: {
+    toggle_moon() {
+      this.moon = !this.moon;
+    },
+  },
 };
 </script>
 
@@ -27,9 +50,19 @@ export default {
 * {
   color: #ddeeff;
 }
-.portrait {
+.portrait-box {
   margin-top: 3vh;
   margin-bottom: 5vh;
+  width: calc(90px + 6vw);
+  height: calc(90px + 6vw);
+  border-radius: calc(45px + 3vw);
+}
+.portrait {
+  position: absolute;
+  width: calc(90px + 6vw);
+}
+.portrait-moon {
+  position: absolute;
   width: calc(90px + 6vw);
 }
 p {
