@@ -26,6 +26,7 @@ export default {
 <style scoped>
 .transition-box {
   margin-top: -1px;
+  margin-bottom: -1px;
   width: 100%;
   height: 10vh;
 }
