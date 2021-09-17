@@ -2,8 +2,11 @@
   <Navbar />
   <Skyfield />
   <HomeSection />
+  <Divider upper_color="rgb(0, 0, 0, 0)" lower_color="#eee0c2" />
   <ResumeSection />
+  <Divider upper_color="#eee0c2" lower_color="#161a28" />
   <ProjectSection />
+  <Divider upper_color="#161a28" lower_color="rgb(0, 0, 0, 0)" />
   <ContactSection />
 </template>
 
@@ -14,6 +17,7 @@ import HomeSection from "./sections/HomeSection.vue";
 import ProjectSection from "./sections/ProjectSection/ProjectSection.vue";
 import ResumeSection from "./sections/ResumeSection/ResumeSection.vue";
 import ContactSection from "./sections/ContactSection.vue";
+import Divider from "./sections/Divider.vue";
 export default {
   name: "HomeScreen",
   components: {
@@ -23,6 +27,7 @@ export default {
     ResumeSection,
     ProjectSection,
     ContactSection,
+    Divider,
   },
 };
 </script>
