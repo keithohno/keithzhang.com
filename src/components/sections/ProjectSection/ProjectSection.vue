@@ -1,7 +1,7 @@
 <template>
-  <div class="d-flex align-items-center flex-column" id="project-section">
-    <h3 class="mb-4">PROJECTS</h3>
-    <div class="project-section-inner">
+  <div class="section-wrapper" id="project-section">
+    <div class="section-large">
+      <h3 class="section-header mb-4">PROJECTS</h3>
       <div class="project-card-section">
         <ProjectCard
           desc="WhatsForDinner (WIP) - a small recipe app build using Vue, Flask, and MongoDB."
@@ -23,7 +23,8 @@
       </div>
     </div>
   </div>
-</template>
+</template> 
+
 
 <script>
 import ProjectCard from "./ProjectCard.vue";
@@ -36,20 +37,12 @@ export default {
 </script>
 
 <style scoped>
+h3 {
+  color: #ddeeff;
+}
 #project-section {
-  min-height: 105vh;
   padding-top: 70px;
-  width: 100%;
-  text-align: center;
   background-color: #161a28;
-}
-.project-section-inner {
-  position: relative;
-}
-@media only screen and (min-width: 600px) {
-  .project-section-inner {
-    width: 85%;
-  }
 }
 .project-card-section {
   display: flex;

@@ -2,6 +2,7 @@
   <Navbar />
   <Skyfield />
   <HomeSection />
+  <ResumeSection />
   <ProjectSection />
   <ContactSection />
 </template>
@@ -11,6 +12,7 @@ import Skyfield from "./skyfield/Skyfield.vue";
 import Navbar from "./Navbar.vue";
 import HomeSection from "./sections/HomeSection.vue";
 import ProjectSection from "./sections/ProjectSection/ProjectSection.vue";
+import ResumeSection from "./sections/ResumeSection/ResumeSection.vue";
 import ContactSection from "./sections/ContactSection.vue";
 export default {
   name: "HomeScreen",
@@ -18,13 +20,14 @@ export default {
     Skyfield,
     Navbar,
     HomeSection,
+    ResumeSection,
     ProjectSection,
     ContactSection,
   },
 };
 </script>
 
-<style scoped>
+<style>
 @font-face {
   font-family: "KoHo";
   src: url("../../public/fonts/koho.woff") format("woff"),
@@ -33,27 +36,39 @@ export default {
 html {
   scroll-behavior: smooth;
 }
-::v-deep p {
-  color: #ddeeff;
+.section-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-::v-deep .my-text {
-  font-size: calc(12px + 1.2vw);
+.section-small {
+  width: 85%;
+  min-height: 105vh;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-::v-deep h3 {
+.section-large {
+  width: 100%;
+  display: flex;
+  min-height: 105vh;
+  flex-direction: column;
+  align-items: center;
+}
+@media only screen and (min-width: 600px) {
+  .section-large {
+    width: 85%;
+  }
+}
+.section-header {
   font-family: KoHo;
   font-size: calc(20px + 3vw);
   font-weight: 600;
   text-align: center;
   letter-spacing: calc(3px + 1vw);
-  color: #ddeeff;
-  width: 85%;
 }
-::v-deep h1 {
-  font-family: KoHo;
-  font-size: calc(30px + 6vw);
-  font-weight: 600;
-  text-align: center;
-  letter-spacing: calc(4px + 1.1vw);
-  width: 85%;
+.my-text {
+  font-size: calc(12px + 1.2vw);
 }
 </style>
