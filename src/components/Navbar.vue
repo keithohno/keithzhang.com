@@ -5,11 +5,11 @@
     </div>
     |
     <div class="my-link">
-      <a href="#resume-section">RESUME</a>
+      <a href="#project-section">PROJECTS</a>
     </div>
     |
     <div class="my-link">
-      <a href="#project-section">PROJECTS</a>
+      <a href="#resume-section">RESUME</a>
     </div>
     |
     <div class="my-link">

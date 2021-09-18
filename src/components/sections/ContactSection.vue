@@ -22,9 +22,10 @@ export default {
 <style scoped>
 h3,
 .my-text {
-  color: #ddeeff;
+  color: #161a28;
 }
 #contact-section {
   padding-top: 60px;
+  background-color: #eee0c2;
 }
 </style>

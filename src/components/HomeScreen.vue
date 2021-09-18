@@ -3,10 +3,10 @@
   <Skyfield />
   <HomeSection />
   <Divider upper_color="rgb(0, 0, 0, 0)" lower_color="#eee0c2" />
-  <ResumeSection />
-  <Divider upper_color="#eee0c2" lower_color="#161a28" />
   <ProjectSection />
-  <Divider upper_color="#161a28" lower_color="rgb(0, 0, 0, 0)" />
+  <Divider upper_color="#eee0c2" lower_color="#rgb(0, 0, 0, 0)" />
+  <ResumeSection />
+  <Divider upper_color="rgb(0, 0, 0, 0)" lower_color="#eee0c2" />
   <ContactSection />
 </template>
 

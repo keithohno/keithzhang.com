@@ -28,20 +28,28 @@ export default {
   margin-top: -1px;
   margin-bottom: -1px;
   width: 100%;
-  height: 10vh;
+  height: calc(2vh + 4vw);
 }
 .transition-lower {
   background-color: var(--lower-color);
   position: absolute;
   width: 100%;
-  height: 10vh;
-  clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0, 50% 10vh);
+  height: calc(2vh + 4vw);
+  clip-path: polygon(
+    0 20%,
+    15% 1%,
+    50% 99%,
+    85% 1%,
+    100% 20%,
+    100% 100%,
+    0 100%
+  );
 }
 .transition-upper {
   background-color: var(--upper-color);
   position: absolute;
   width: 100%;
-  height: 10vh;
-  clip-path: polygon(100% 0, 0 0, 50% 10vh);
+  height: calc(2vh + 4vw);
+  clip-path: polygon(0 0, 100% 0, 100% 20%, 85% 1%, 50% 99%, 15% 1%, 0 20%);
 }
 </style>

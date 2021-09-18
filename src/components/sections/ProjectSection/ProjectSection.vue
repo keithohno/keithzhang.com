@@ -38,11 +38,11 @@ export default {
 
 <style scoped>
 h3 {
-  color: #ddeeff;
+  color: #161a28;
 }
 #project-section {
   padding-top: 70px;
-  background-color: #161a28;
+  background-color: #eee0c2;
 }
 .project-card-section {
   display: flex;

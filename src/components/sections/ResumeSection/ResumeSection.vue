@@ -14,10 +14,9 @@ export default {
 
 <style scoped>
 h3 {
-  color: #161a28;
+  color: #ddeeff;
 }
 #resume-section {
   padding-top: 70px;
-  background-color: #eee0c2;
 }
 </style>
