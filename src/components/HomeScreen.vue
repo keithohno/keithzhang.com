@@ -1,13 +1,15 @@
 <template>
   <Navbar />
   <Skyfield />
-  <HomeSection />
-  <Divider upper_color="rgb(0, 0, 0, 0)" lower_color="#eee0c2" />
-  <ProjectSection />
-  <Divider upper_color="#eee0c2" lower_color="#rgb(0, 0, 0, 0)" />
-  <ResumeSection />
-  <Divider upper_color="rgb(0, 0, 0, 0)" lower_color="#eee0c2" />
-  <ContactSection />
+  <div id="root">
+    <HomeSection />
+    <Divider upper_color="rgb(0, 0, 0, 0)" lower_color="#eee0c2" />
+    <ProjectSection />
+    <Divider upper_color="#eee0c2" lower_color="#rgb(0, 0, 0, 0)" />
+    <ResumeSection />
+    <Divider upper_color="rgb(0, 0, 0, 0)" lower_color="#eee0c2" />
+    <ContactSection />
+  </div>
 </template>
 
 <script>
@@ -41,14 +43,18 @@ export default {
 html {
   scroll-behavior: smooth;
 }
+html,
+body {
+  overflow: hidden;
+}
 .section-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 105vh;
 }
 .section-small {
   width: 85%;
-  min-height: 105vh;
   max-width: 600px;
   display: flex;
   flex-direction: column;
@@ -57,7 +63,6 @@ html {
 .section-large {
   width: 100%;
   display: flex;
-  min-height: 105vh;
   flex-direction: column;
   align-items: center;
 }
@@ -75,5 +80,15 @@ html {
 }
 .my-text {
   font-size: calc(12px + 1.2vw);
+}
+#root {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+}
+.section-wrapper {
+  scroll-snap-align: start;
 }
 </style>
