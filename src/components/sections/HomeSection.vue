@@ -18,12 +18,10 @@
       </div>
       <div>
         <p class="my-text">
-          Hi, I'm Keith! I'm <span class="small-text">(almost!)</span> a
-          <span class="yellow-text">computer science</span> graduate, looking to
-          <span class="yellow-text">apply</span> my skills and
-          <span class="yellow-text">build</span> experience as a software
-          engineer, with a focus towards
-          <span class="yellow-text">front-end</span> web development.
+          Hi, I'm Keith, a soon-to-be
+          <span class="yellow-text">computer science</span> graduate. I love
+          <span class="yellow-text">building</span> systems that work, and
+          <span class="yellow-text">learning</span> about the world we live in.
         </p>
         <p></p>
         <p class="my-text">
