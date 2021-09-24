@@ -42,6 +42,7 @@ h3 {
 }
 #project-section {
   padding-top: 70px;
+  padding-bottom: 70px;
   background-color: #eee0c2;
 }
 .project-card-section {
