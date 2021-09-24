@@ -4,7 +4,7 @@
       <h3 class="section-header mb-4">PROJECTS</h3>
       <div class="project-card-section">
         <ProjectCard
-          desc="WhatsForDinner (WIP) - a small recipe app build using Vue, Flask, and MongoDB."
+          desc="WhatsForDinner (WIP) - a small recipe app built using Vue, Flask, and MongoDB."
           img="whatsfordinner.png"
           github="https://github.com/keithohno/WhatsForDinner"
           live="dinner"
