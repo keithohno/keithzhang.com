@@ -6,7 +6,7 @@
     <Divider upper_color="rgb(0, 0, 0, 0)" lower_color="#eee0c2" />
     <ProjectSection />
     <Divider upper_color="#eee0c2" lower_color="#rgb(0, 0, 0, 0)" />
-    <ResumeSection />
+    <AboutSection />
     <Divider upper_color="rgb(0, 0, 0, 0)" lower_color="#eee0c2" />
     <ContactSection />
   </div>
@@ -17,7 +17,7 @@ import Skyfield from "./skyfield/Skyfield.vue";
 import Navbar from "./Navbar.vue";
 import HomeSection from "./sections/HomeSection.vue";
 import ProjectSection from "./sections/ProjectSection/ProjectSection.vue";
-import ResumeSection from "./sections/ResumeSection/ResumeSection.vue";
+import AboutSection from "./sections/AboutSection/AboutSection.vue";
 import ContactSection from "./sections/ContactSection.vue";
 import Divider from "./sections/Divider.vue";
 export default {
@@ -26,7 +26,7 @@ export default {
     Skyfield,
     Navbar,
     HomeSection,
-    ResumeSection,
+    AboutSection,
     ProjectSection,
     ContactSection,
     Divider,

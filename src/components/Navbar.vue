@@ -9,7 +9,7 @@
     </div>
     |
     <div class="my-link">
-      <a href="#resume-section">RESUME</a>
+      <a href="#about-section">ABOUT</a>
     </div>
     |
     <div class="my-link">
