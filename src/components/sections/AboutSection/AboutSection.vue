@@ -32,7 +32,7 @@ h3,
 p {
   color: #ddeeff;
 }
-#resume-section {
+#about-section {
   padding-top: 70px;
   padding-bottom: 70px;
 }
