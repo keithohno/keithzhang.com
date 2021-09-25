@@ -18,14 +18,13 @@
       </div>
       <div>
         <p class="my-text">
-          Hi, I'm Keith, a soon-to-be
-          <span class="yellow-text">computer science</span> graduate. I love
+          Hi, I'm Keith, a soon-to-be computer science graduate. I love
           <span class="yellow-text">building</span> systems that work, and
           <span class="yellow-text">learning</span> about the world we live in.
         </p>
         <p></p>
         <p class="my-text">
-          I'd like to stand on the <span class="yellow-text">moon</span> someday
+          I'd <span class="yellow-text">love</span> to stand on the moon someday
           :)
         </p>
       </div>

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h5>The Moon</h5>
-    Well, not exclusively. This section is dedicated to the fields and hobbies
-    I'm passionate about, outside of work and the classroom.
+    <h5>Love</h5>
+    This section is dedicated to the fields and hobbies I'm passionate about,
+    outside of work and the classroom.
     <ul>
       <li>
         Space -- Planet Earth is just one small rock, floating through a vast,
@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: "TheMoon",
+  name: "Love",
 };
 </script>
 

@@ -8,7 +8,7 @@
       </p>
       <Building />
       <Learning />
-      <TheMoon />
+      <Love />
     </div>
   </div>
 </template>
@@ -16,13 +16,13 @@
 <script>
 import Building from "./Building.vue";
 import Learning from "./Learning.vue";
-import TheMoon from "./TheMoon.vue";
+import Love from "./Love.vue";
 export default {
   name: "AboutSection",
   components: {
     Building,
     Learning,
-    TheMoon,
+    Love,
   },
 };
 </script>
