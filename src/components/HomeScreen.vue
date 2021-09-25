@@ -40,9 +40,6 @@ export default {
   src: url("../../public/fonts/koho.woff") format("woff"),
     url("../../public/fonts/koho.woff2") format("woff2");
 }
-html {
-  scroll-behavior: smooth;
-}
 html,
 body {
   overflow: hidden;
@@ -82,6 +79,7 @@ body {
   font-size: calc(12px + 1.2vw);
 }
 #root {
+  scroll-behavior: smooth;
   position: absolute;
   height: 100vh;
   width: 100vw;
