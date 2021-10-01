@@ -2,19 +2,21 @@
   <div class="section-wrapper" id="home-section">
     <h1>KEITH ZHANG</h1>
     <div class="section-small">
-      <div class="portrait-box">
-        <img
-          src="../../../public/ME.png"
-          v-if="!moon"
-          class="portrait"
-          @click="toggle_moon"
-        />
-        <img
-          src="../../../public/moon.png"
-          v-if="moon"
-          class="portrait-moon"
-          @click="toggle_moon"
-        />
+      <div class="portrait-box" @click="toggle_moon">
+        <transition name="fade">
+          <img
+            src="../../../public/ME.png"
+            v-show="!moon"
+            class="portrait-face"
+          />
+        </transition>
+        <transition name="fade">
+          <img
+            src="../../../public/moon.png"
+            v-show="moon"
+            class="portrait-moon"
+          />
+        </transition>
       </div>
       <div>
         <p class="my-text">
@@ -66,12 +68,10 @@ h1 {
   margin-bottom: 5vh;
   width: calc(90px + 6vw);
   height: calc(90px + 6vw);
-  border-radius: calc(45px + 3vw);
+  border-radius: 50%;
+  animation: pulse 3s infinite;
 }
-.portrait {
-  position: absolute;
-  width: calc(90px + 6vw);
-}
+.portrait-face,
 .portrait-moon {
   position: absolute;
   width: calc(90px + 6vw);
@@ -82,5 +82,26 @@ h1 {
 .yellow-text {
   color: #ffeecc;
   font-weight: 500;
+}
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 rgba(255, 238, 204, 0);
+  }
+
+  50% {
+    box-shadow: 0 0 rgba(255, 238, 204, 1);
+  }
+
+  100% {
+    box-shadow: 0 0 0 10px rgba(255, 238, 204, 0);
+  }
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 1s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
