@@ -20,7 +20,7 @@
       </div>
       <div>
         <p class="my-text">
-          Hi, I'm Keith, a soon-to-be computer science graduate. I love
+          Hi, I'm Keith, a soon-to-be computer science graduate. I enjoy
           <span class="yellow-text">building</span> systems that work, and
           <span class="yellow-text">learning</span> about the world we live in.
         </p>
