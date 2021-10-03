@@ -1,14 +1,15 @@
 <template>
   <div class="section-wrapper" id="about-section">
     <div class="section-large">
-      <h3 class="section-header">ABOUT ME</h3>
       <p>
         This section is very much a work in progress, so bear with me as I sort
         things out!
       </p>
-      <Building />
-      <Learning />
-      <Love />
+      <div class="topic-section">
+        <Building />
+        <Learning />
+        <Love />
+      </div>
     </div>
   </div>
 </template>
@@ -35,5 +36,11 @@ p {
 #about-section {
   padding-top: 70px;
   padding-bottom: 70px;
+}
+.topic-section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 </style>

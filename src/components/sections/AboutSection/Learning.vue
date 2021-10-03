@@ -1,9 +1,14 @@
 <template>
-  <div>
-    <h5>Learning</h5>
-    I am always lookings to learn new technologies and skills that can
-    meaningfully expand my technical 'toolbox'. Here are a couple frameworks I'm
-    currently experimenting with:
+  <AboutCard icon="learning_icon.png" title="Learn">
+    <p>
+      "to acquire knowledge of or skill in by study, instruction, or experience"
+    </p>
+    <p>
+      As a student, Christian, and young adult, I am constantly humbled by the
+      vast nature of the world and societies we live in. Over the coming months
+      and years, I hope to explore where the knowledge I've accumulated
+      intersects the needs of the communities around me.
+    </p>
     <ul>
       <li>
         MongoDB -- I used MongoDB to construct the data end of WhatsForDinner!
@@ -18,20 +23,15 @@
         C++), and creating simple 2D and 3D demos.
       </li>
     </ul>
-  </div>
+  </AboutCard>
 </template>
 
 <script>
+import AboutCard from "./AboutCard.vue";
 export default {
   name: "Learning",
+  components: {
+    AboutCard,
+  },
 };
 </script>
-
-
-<style scoped>
-div {
-  width: 100%;
-  text-align: left;
-  color: #ddeeff;
-}
-</style>

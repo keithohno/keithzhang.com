@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <h5>Love</h5>
-    This section is dedicated to the fields and hobbies I'm passionate about,
-    outside of work and the classroom.
+  <AboutCard icon="love_icon.png" title="Love">
+    <p>
+      "an intense feeling of deep affection; a great interest and pleasure in
+      something"
+    </p>
+    <p>Surprise, surprise, I'm not just a boring CS nerd!</p>
     <ul>
       <li>
         Space -- Planet Earth is just one small rock, floating through a vast,
@@ -19,20 +21,15 @@
         home. Current favorites: stir-fry napa cabbage and korean egg rolls.
       </li>
     </ul>
-  </div>
+  </AboutCard>
 </template>
 
 <script>
+import AboutCard from "./AboutCard.vue";
 export default {
   name: "Love",
+  components: {
+    AboutCard,
+  },
 };
 </script>
-
-
-<style scoped>
-div {
-  width: 100%;
-  text-align: left;
-  color: #ddeeff;
-}
-</style>

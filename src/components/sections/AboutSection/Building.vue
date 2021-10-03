@@ -1,8 +1,12 @@
 <template>
-  <div>
-    <h5>Building</h5>
-    I've successfully built and deployed projects that use the following
-    technologies, all of which I am quite comfortable working with:
+  <AboutCard icon="building_icon.png" title="Build">
+    <p>"to form by ordering and uniting materials into a composite whole"</p>
+    <p>
+      Ever since my childhood days of jigsaws and legos, I've always enjoyed
+      seeing small, intricate details coalesce into a cohesive, functioning
+      whole. My passion for computer science begins with my proclivity to
+      create.
+    </p>
     <ul>
       <li>
         Python -- I built the backend for WhatsForDinner with Python/Flask, and
@@ -27,20 +31,15 @@
         and cloud-based) for my computing needs.
       </li>
     </ul>
-  </div>
+  </AboutCard>
 </template>
 
 <script>
+import AboutCard from "./AboutCard.vue";
 export default {
   name: "Building",
+  components: {
+    AboutCard,
+  },
 };
 </script>
-
-
-<style scoped>
-div {
-  width: 100%;
-  text-align: left;
-  color: #ddeeff;
-}
-</style>
