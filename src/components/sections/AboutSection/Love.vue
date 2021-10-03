@@ -4,7 +4,7 @@
       "an intense feeling of deep affection; a great interest and pleasure in
       something"
     </p>
-    <p>Surprise, surprise, I'm not just a boring CS nerd!</p>
+    <p>Surprise, surprise, I'm not just a boring CS kid!</p>
     <ul>
       <li>
         Space -- Planet Earth is just one small rock, floating through a vast,

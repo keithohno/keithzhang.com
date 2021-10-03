@@ -5,9 +5,9 @@
     </p>
     <p>
       As a student, Christian, and young adult, I am constantly humbled by the
-      vast nature of the world and societies we live in. Over the coming months
-      and years, I hope to explore where the knowledge I've accumulated
-      intersects the needs of the communities around me.
+      vast nature of the world we live in. Over the coming months and years, I
+      hope to explore where the knowledge I've accumulated intersects the needs
+      of the communities around me.
     </p>
     <ul>
       <li>
