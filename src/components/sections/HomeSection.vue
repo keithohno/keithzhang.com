@@ -18,15 +18,15 @@
           />
         </transition>
       </div>
-      <div>
-        <p class="my-text">
-          Hi, I'm Keith, a soon-to-be computer science graduate. I enjoy
-          <span class="yellow-text">building</span> systems that work, and
-          <span class="yellow-text">learning</span> about the world we live in.
+      <div class="my-text">
+        <p>
+          Hi, I'm Keith, a soon-to-be computer science graduate. I want to
+          <span class="blue-text">build</span> systems that solve problems, and
+          <span class="yellow-text">learn</span> more about the world at large.
         </p>
         <p></p>
-        <p class="my-text">
-          I'd <span class="yellow-text">love</span> to stand on the moon someday
+        <p>
+          I'd <span class="pink-text">love</span> to stand on the moon someday
           :)
         </p>
       </div>
@@ -79,9 +79,29 @@ h1 {
 #home-section {
   padding-top: 60px;
 }
-.yellow-text {
+.my-text:hover .blue-text {
+  color: #aac6ff;
+  transition: 1s;
+}
+.my-text:hover .yellow-text {
   color: #ffeecc;
+  transition: 1s;
+}
+.my-text:hover .pink-text {
+  color: #ffccdd;
+  transition: 1s;
+}
+.blue-text {
   font-weight: 500;
+  transition: 3s;
+}
+.yellow-text {
+  font-weight: 500;
+  transition: 3s;
+}
+.pink-text {
+  font-weight: 500;
+  transition: 3s;
 }
 @keyframes pulse {
   0% {
