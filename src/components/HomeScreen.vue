@@ -48,7 +48,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 105vh;
+  min-height: 100vh;
 }
 .section-small {
   width: 85%;
@@ -83,10 +83,13 @@ body {
   position: absolute;
   height: 100vh;
   width: 100vw;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
   overflow-y: scroll;
 }
 .section-wrapper {
   scroll-snap-align: start;
+}
+.divider-start {
+  scroll-snap-align: end;
 }
 </style>

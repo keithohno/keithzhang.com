@@ -1,4 +1,5 @@
 <template>
+  <div class="divider-start" />
   <div class="transition-box" :style="style">
     <div class="transition-upper"></div>
     <div class="transition-lower"></div>
