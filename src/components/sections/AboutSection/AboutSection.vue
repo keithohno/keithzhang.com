@@ -11,7 +11,8 @@
         <Love />
       </div>
       <button @click="toggle">Toggle</button>
-      <AboutDetails :shown="shown"></AboutDetails>
+      <button @click="switch_mode">Switch Mode</button>
+      <TopicSegment :shown="shown" :topic="mode ? 'cooking' : 'python'" />
     </div>
   </div>
 </template>
@@ -20,23 +21,27 @@
 import Building from "./categories/Building.vue";
 import Learning from "./categories/Learning.vue";
 import Love from "./categories/Love.vue";
-import AboutDetails from "./AboutDetails.vue";
+import TopicSegment from "./topics/TopicSegment.vue";
 export default {
   name: "AboutSection",
   components: {
     Building,
     Learning,
     Love,
-    AboutDetails,
+    TopicSegment,
   },
   data: function () {
     return {
       shown: false,
+      mode: 0,
     };
   },
   methods: {
     toggle() {
       this.shown = !this.shown;
+    },
+    switch_mode() {
+      this.mode = (this.mode + 1) % 2;
     },
   },
 };
