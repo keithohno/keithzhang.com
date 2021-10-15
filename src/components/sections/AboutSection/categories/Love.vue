@@ -5,31 +5,18 @@
       something"
     </p>
     <p>Surprise, surprise, I'm not just a boring CS kid!</p>
-    <ul>
-      <li>
-        Space -- Planet Earth is just one small rock, floating through a vast,
-        beautiful sea of stars, galaxies, and worlds which we have yet to
-        explore. I'd love to be a part of that exploratory process someday.
-      </li>
-      <li>
-        Music -- Singing while playing piano or guitar is my go-to destressing
-        activity. Current favorites: Teleprompter (EMIA) and Grace (Laura
-        Story).
-      </li>
-      <li>
-        Cooking -- I love food (who doesn't?), and make most of my meals at
-        home. Current favorites: stir-fry napa cabbage and korean egg rolls.
-      </li>
-    </ul>
+    <TagList :slot-scope="['Space', 'Music', 'Cooking']" />
   </CategoryContainer>
 </template>
 
 <script>
 import CategoryContainer from "./CategoryContainer.vue";
+import TagList from "./TagList.vue";
 export default {
   name: "Love",
   components: {
     CategoryContainer,
+    TagList,
   },
 };
 </script>
