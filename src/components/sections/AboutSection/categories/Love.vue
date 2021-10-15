@@ -5,7 +5,7 @@
       something"
     </p>
     <p>Surprise, surprise, I'm not just a boring CS kid!</p>
-    <TagList :slot-scope="['Space', 'Music', 'Cooking']" />
+    <TagList :tags="['Space', 'Music', 'Cooking']" />
   </CategoryContainer>
 </template>
 
