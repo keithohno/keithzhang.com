@@ -41,7 +41,7 @@ export default {
             obj.x += (dt / 6000) * obj.speed;
           }
           for (let i = 0; i < this.objs.length; i++) {
-            if (this.objs[i].x > document.documentElement.scrollWidth) {
+            if (this.objs[i].x > document.documentElement.clientWidth) {
               this.objs.splice(i, 1);
               i -= 1;
             }
@@ -54,16 +54,16 @@ export default {
     },
     generate_all() {
       if (this.x_min > -1) {
-        if (this.x_min > document.documentElement.scrollWidth) {
-          this.x_min = document.documentElement.scrollWidth;
+        if (this.x_min > document.documentElement.clientWidth) {
+          this.x_min = document.documentElement.clientWidth;
         }
-        for (let i = 0; i * 50 < document.documentElement.scrollHeight; i++) {
+        for (let i = 0; i * 50 < document.documentElement.clientHeight; i++) {
           this.generate(this.x_min - 20, 50 * i);
         }
         this.x_min -= 20;
       }
-      while (this.x_max < document.documentElement.scrollWidth) {
-        for (let i = 0; i * 50 < document.documentElement.scrollWidth; i++) {
+      while (this.x_max < document.documentElement.clientWidth) {
+        for (let i = 0; i * 50 < document.documentElement.clientWidth; i++) {
           this.generate(this.x_max + 1, 50 * i);
         }
         this.x_max += 20;
