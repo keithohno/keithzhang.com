@@ -1,11 +1,9 @@
 <template>
-  <div
-    :class="{ 'topic-segment-shown': shown, 'topic-segment-hidden': !shown }"
-    class="topic-segment"
-  >
-    <p>toggleable details section</p>
-    <Cooking v-if="topic == 'cooking'" />
-    <Python v-if="topic == 'python'" />
+  <div class="topic-segment" :style="{ height: segment_height + 'px' }">
+    <div ref="inner">
+      <Cooking v-if="topic == 'cooking'" />
+      <Python v-if="topic == 'python'" />
+    </div>
   </div>
 </template>
 
@@ -18,9 +16,33 @@ export default {
     Cooking,
     Python,
   },
+  data: function () {
+    return {
+      segment_height: 0,
+    };
+  },
   props: {
     shown: Boolean,
     topic: String,
+  },
+  watch: {
+    topic() {
+      this.animate_height();
+    },
+    shown() {
+      if (!this.shown) {
+        this.segment_height = 0;
+      } else {
+        this.animate_height();
+      }
+    },
+  },
+  methods: {
+    animate_height() {
+      requestAnimationFrame(() => {
+        this.segment_height = this.$refs.inner.scrollHeight;
+      });
+    },
   },
 };
 </script>
@@ -30,12 +52,6 @@ export default {
   overflow: hidden;
   width: 100%;
   transition: 2s;
-}
-.topic-segment-hidden {
-  max-height: 0;
-}
-.topic-segment-shown {
-  max-height: 200px;
 }
 p {
   color: #ddeeff;
