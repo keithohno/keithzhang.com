@@ -1,5 +1,5 @@
 <template>
-  <AboutCard icon="building_icon.png" title="Build">
+  <CategoryContainer icon="building_icon.png" title="Build">
     <p>"to form by ordering and uniting materials into a composite whole"</p>
     <p>
       Ever since my childhood days of jigsaws and legos, I've always enjoyed
@@ -31,15 +31,15 @@
         and cloud-based) for my computing needs.
       </li>
     </ul>
-  </AboutCard>
+  </CategoryContainer>
 </template>
 
 <script>
-import AboutCard from "./AboutCard.vue";
+import CategoryContainer from "./CategoryContainer.vue";
 export default {
   name: "Building",
   components: {
-    AboutCard,
+    CategoryContainer,
   },
 };
 </script>

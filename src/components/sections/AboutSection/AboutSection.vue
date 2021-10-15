@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import Building from "./Building.vue";
-import Learning from "./Learning.vue";
-import Love from "./Love.vue";
+import Building from "./categories/Building.vue";
+import Learning from "./categories/Learning.vue";
+import Love from "./categories/Love.vue";
 import AboutDetails from "./AboutDetails.vue";
 export default {
   name: "AboutSection",

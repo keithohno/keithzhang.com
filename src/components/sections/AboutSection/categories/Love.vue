@@ -1,5 +1,5 @@
 <template>
-  <AboutCard icon="love_icon.png" title="Love">
+  <CategoryContainer icon="love_icon.png" title="Love">
     <p>
       "an intense feeling of deep affection; a great interest and pleasure in
       something"
@@ -21,15 +21,15 @@
         home. Current favorites: stir-fry napa cabbage and korean egg rolls.
       </li>
     </ul>
-  </AboutCard>
+  </CategoryContainer>
 </template>
 
 <script>
-import AboutCard from "./AboutCard.vue";
+import CategoryContainer from "./CategoryContainer.vue";
 export default {
   name: "Love",
   components: {
-    AboutCard,
+    CategoryContainer,
   },
 };
 </script>

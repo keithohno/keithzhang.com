@@ -1,5 +1,5 @@
 <template>
-  <AboutCard icon="learning_icon.png" title="Learn">
+  <CategoryContainer icon="learning_icon.png" title="Learn">
     <p>
       "to acquire knowledge of or skill in by study, instruction, or experience"
     </p>
@@ -23,15 +23,15 @@
         C++), and creating simple 2D and 3D demos.
       </li>
     </ul>
-  </AboutCard>
+  </CategoryContainer>
 </template>
 
 <script>
-import AboutCard from "./AboutCard.vue";
+import CategoryContainer from "./CategoryContainer.vue";
 export default {
   name: "Learning",
   components: {
-    AboutCard,
+    CategoryContainer,
   },
 };
 </script>

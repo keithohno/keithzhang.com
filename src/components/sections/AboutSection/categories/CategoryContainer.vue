@@ -1,5 +1,5 @@
 <template>
-  <div class="about-card">
+  <div class="category-container">
     <div class="title-bar">
       <img :src="img_src(icon)" class="title-icon" />
       <p class="title-text">
@@ -13,10 +13,10 @@
 </template>
 
 <script>
-let asset_src = require.context("../../../../public/", false, /\.png$/);
+let asset_src = require.context("../../../../../public/", false, /\.png$/);
 
 export default {
-  name: "AboutCard",
+  name: "CategoryContainer",
   props: { icon: String, title: String },
   methods: {
     img_src(path) {
@@ -31,7 +31,7 @@ div {
   text-align: left;
   color: #ddeeff;
 }
-.about-card {
+.category-container {
   margin: calc(2px + 1vw);
   display: inline-block;
   min-width: 300px;
