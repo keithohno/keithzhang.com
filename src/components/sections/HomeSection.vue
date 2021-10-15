@@ -2,7 +2,11 @@
   <div class="section-wrapper" id="home-section">
     <h1>KEITH ZHANG</h1>
     <div class="section-small">
-      <div class="portrait-box" @click="toggle_moon">
+      <div
+        class="portrait-box"
+        @mouseenter="toggle_moon"
+        @mouseexit="toggle_moon"
+      >
         <transition name="fade">
           <img
             src="../../../public/ME.png"
@@ -79,29 +83,19 @@ h1 {
 #home-section {
   padding-top: 60px;
 }
-.my-text:hover .blue-text {
-  color: #aac6ff;
-  transition: 1s;
-}
-.my-text:hover .yellow-text {
-  color: #ffeecc;
-  transition: 1s;
-}
-.my-text:hover .pink-text {
-  color: #ffccdd;
-  transition: 1s;
-}
 .blue-text {
-  font-weight: 500;
-  transition: 3s;
+  color: #aac6ff;
 }
 .yellow-text {
-  font-weight: 500;
-  transition: 3s;
+  color: #ffeecc;
 }
 .pink-text {
+  color: #ffccdd;
+}
+.blue-text,
+.yellow-text,
+.pink-text {
   font-weight: 500;
-  transition: 3s;
 }
 @keyframes pulse {
   0% {
