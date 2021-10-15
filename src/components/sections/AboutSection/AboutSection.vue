@@ -10,9 +10,9 @@
         <Learning />
         <Love />
       </div>
-      <button @click="toggle">Toggle</button>
+      <button @click="hide">Hide</button>
       <button @click="switch_mode">Switch Mode</button>
-      <TopicSegment :shown="shown" :topic="mode ? 'cooking' : 'python'" />
+      <TopicSegment :topic="topic" />
     </div>
   </div>
 </template>
@@ -22,6 +22,19 @@ import Building from "./categories/Building.vue";
 import Learning from "./categories/Learning.vue";
 import Love from "./categories/Love.vue";
 import TopicSegment from "./topics/TopicSegment.vue";
+
+let topics = [
+  "python",
+  "jsvue",
+  "java",
+  "linux",
+  "mongodb",
+  "opengl",
+  "space",
+  "music",
+  "cooking",
+];
+
 export default {
   name: "AboutSection",
   components: {
@@ -32,16 +45,17 @@ export default {
   },
   data: function () {
     return {
-      shown: false,
       mode: 0,
+      topic: "",
     };
   },
   methods: {
-    toggle() {
-      this.shown = !this.shown;
+    hide() {
+      this.topic = "";
     },
     switch_mode() {
-      this.mode = (this.mode + 1) % 2;
+      this.mode = (this.mode + 1) % topics.length;
+      this.topic = topics[this.mode];
     },
   },
 };

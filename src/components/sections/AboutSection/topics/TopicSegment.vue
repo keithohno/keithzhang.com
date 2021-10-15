@@ -1,20 +1,41 @@
 <template>
   <div class="topic-segment" :style="{ height: segment_height + 'px' }">
     <div ref="inner">
-      <Cooking v-if="topic == 'cooking'" />
       <Python v-if="topic == 'python'" />
+      <JSVue v-if="topic == 'jsvue'" />
+      <Java v-if="topic == 'java'" />
+      <Linux v-if="topic == 'linux'" />
+      <MongoDB v-if="topic == 'mongodb'" />
+      <OpenGL v-if="topic == 'opengl'" />
+      <Space v-if="topic == 'space'" />
+      <Music v-if="topic == 'music'" />
+      <Cooking v-if="topic == 'cooking'" />
     </div>
   </div>
 </template>
 
 <script>
-import Cooking from "./Cooking.vue";
 import Python from "./Python.vue";
+import JSVue from "./JSVue.vue";
+import Java from "./Java.vue";
+import Linux from "./Linux.vue";
+import MongoDB from "./MongoDB.vue";
+import OpenGL from "./OpenGL.vue";
+import Space from "./Space.vue";
+import Music from "./Music.vue";
+import Cooking from "./Cooking.vue";
 export default {
   name: "TopicSegment",
   components: {
-    Cooking,
     Python,
+    JSVue,
+    Java,
+    Linux,
+    MongoDB,
+    OpenGL,
+    Space,
+    Music,
+    Cooking,
   },
   data: function () {
     return {
@@ -28,13 +49,6 @@ export default {
   watch: {
     topic() {
       this.animate_height();
-    },
-    shown() {
-      if (!this.shown) {
-        this.segment_height = 0;
-      } else {
-        this.animate_height();
-      }
     },
   },
   methods: {
