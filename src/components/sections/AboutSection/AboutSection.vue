@@ -10,6 +10,8 @@
         <Learning />
         <Love />
       </div>
+      <button @click="toggle">Toggle</button>
+      <AboutDetails :shown="shown"></AboutDetails>
     </div>
   </div>
 </template>
@@ -18,12 +20,24 @@
 import Building from "./Building.vue";
 import Learning from "./Learning.vue";
 import Love from "./Love.vue";
+import AboutDetails from "./AboutDetails.vue";
 export default {
   name: "AboutSection",
   components: {
     Building,
     Learning,
     Love,
+    AboutDetails,
+  },
+  data: function () {
+    return {
+      shown: false,
+    };
+  },
+  methods: {
+    toggle() {
+      this.shown = !this.shown;
+    },
   },
 };
 </script>
