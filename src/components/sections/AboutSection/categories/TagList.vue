@@ -1,6 +1,12 @@
 <template>
   <div class="tag-list">
-    <Tag v-for="tag in tags" :key="tag" :name="tag" />
+    <Tag
+      v-for="(tag, index) in tags"
+      :key="tag"
+      :name="tag"
+      :tag_num="tag_nums[index]"
+      @select-tag="$emit('select-tag')"
+    />
   </div>
 </template>
 
@@ -14,6 +20,7 @@ export default {
   },
   props: {
     tags: Array,
+    tag_nums: Array,
   },
 };
 </script>

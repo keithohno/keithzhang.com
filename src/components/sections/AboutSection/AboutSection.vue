@@ -10,8 +10,6 @@
         <Learning />
         <Love />
       </div>
-      <button @click="hide">Hide</button>
-      <button @click="switch_mode">Switch Mode</button>
       <TopicSegment :topic="topic" />
     </div>
   </div>
@@ -43,19 +41,9 @@ export default {
     Love,
     TopicSegment,
   },
-  data: function () {
-    return {
-      mode: 0,
-      topic: "",
-    };
-  },
-  methods: {
-    hide() {
-      this.topic = "";
-    },
-    switch_mode() {
-      this.mode = (this.mode + 1) % topics.length;
-      this.topic = topics[this.mode];
+  computed: {
+    topic() {
+      return topics[this.$store.state.tag];
     },
   },
 };

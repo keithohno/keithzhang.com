@@ -5,7 +5,7 @@
       something"
     </p>
     <p>Surprise, surprise, I'm not just a boring CS kid!</p>
-    <TagList :tags="['Space', 'Music', 'Cooking']" />
+    <TagList :tags="['Space', 'Music', 'Cooking']" :tag_nums="[6, 7, 8]" />
   </CategoryContainer>
 </template>
 

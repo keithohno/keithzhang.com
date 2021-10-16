@@ -1,5 +1,7 @@
 <template>
-  <div class="topic-tag">{{ name }}</div>
+  <div class="topic-tag" @click="select_tag">
+    {{ name }}
+  </div>
 </template>
 
 <script>
@@ -7,6 +9,12 @@ export default {
   name: "Tag",
   props: {
     name: String,
+    tag_num: Number,
+  },
+  methods: {
+    select_tag() {
+      this.$store.commit("select_tag", this.tag_num);
+    },
   },
 };
 </script>

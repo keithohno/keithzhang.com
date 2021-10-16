@@ -7,7 +7,10 @@
       whole. My passion for computer science begins with my proclivity to
       create.
     </p>
-    <TagList :tags="['Python', 'JS/Vue', 'Java', 'Linux']" />
+    <TagList
+      :tags="['Python', 'JS/Vue', 'Java', 'Linux']"
+      :tag_nums="[0, 1, 2, 3]"
+    />
   </CategoryContainer>
 </template>
 

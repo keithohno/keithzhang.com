@@ -9,7 +9,7 @@
       hope to explore where the knowledge I've accumulated intersects the needs
       of the communities around me.
     </p>
-    <TagList :tags="['MongoDB', 'OpenGL']" />
+    <TagList :tags="['MongoDB', 'OpenGL']" :tag_nums="[4, 5]" />
   </CategoryContainer>
 </template>
 
