@@ -1,12 +1,12 @@
-import { useEffect } from "react";
-import { mat4 } from "gl-matrix";
+import { useEffect, useState } from "react";
+import { mat4, vec3, quat } from "gl-matrix";
 
 import { loadShaderProgram } from "../shader";
 
 const stars = [
-  [1.0, 0.0, 0.04],
-  [0.0, -1.0, 0.02],
-  [0.5, 0.5, 0.05],
+  [1.0, 0.0, -3.0, 0.02],
+  [0.0, -1.0, -4.0, 0.02],
+  [0.5, 0.5, -2.0, 0.02],
 ];
 
 const STAR_VERTS = 12;
@@ -16,17 +16,18 @@ function initBuffers(gl: WebGLRenderingContext) {
 
   for (const star of stars) {
     // create and bind buffer
-    const starBuffer = gl.createBuffer();
+    const starBuffer = gl.createBuffer()!;
     gl.bindBuffer(gl.ARRAY_BUFFER, starBuffer);
     // calculate data
     let vertices: number[] = [];
     for (let i = 0; i < STAR_VERTS; i += 1) {
       vertices.push(
-        star[0] + star[2] * Math.cos((2 * Math.PI * i) / STAR_VERTS)
+        star[0] + star[3] * Math.cos((2 * Math.PI * i) / STAR_VERTS)
       );
       vertices.push(
-        star[1] + star[2] * Math.sin((2 * Math.PI * i) / STAR_VERTS)
+        star[1] + star[3] * Math.sin((2 * Math.PI * i) / STAR_VERTS)
       );
+      vertices.push(star[2]);
     }
     // buffer data
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
@@ -38,7 +39,12 @@ function initBuffers(gl: WebGLRenderingContext) {
   };
 }
 
-function drawScene(gl: WebGLRenderingContext, programInfo: any, buffers: any) {
+function drawScene(
+  gl: WebGLRenderingContext,
+  programInfo: any,
+  buffers: { stars: WebGLBuffer[] },
+  orientation: mat4
+) {
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
   gl.clear(gl.COLOR_BUFFER_BIT);
 
@@ -50,10 +56,7 @@ function drawScene(gl: WebGLRenderingContext, programInfo: any, buffers: any) {
 
   // view matrix
   const viewMatrix = mat4.create();
-  mat4.translate(viewMatrix, viewMatrix, [-0.0, 0.0, -6.0]);
-
-  // model matrix
-  const modelMatrix = mat4.create();
+  mat4.translate(viewMatrix, viewMatrix, [0.0, 0.0, 0.0]);
 
   // set uniforms
   gl.uniformMatrix4fv(
@@ -61,7 +64,7 @@ function drawScene(gl: WebGLRenderingContext, programInfo: any, buffers: any) {
     false,
     projectionMatrix
   );
-  gl.uniformMatrix4fv(programInfo.uniformLocations.uModel, false, modelMatrix);
+  gl.uniformMatrix4fv(programInfo.uniformLocations.uModel, false, orientation);
   gl.uniformMatrix4fv(programInfo.uniformLocations.uView, false, viewMatrix);
 
   for (const buffer of buffers.stars) {
@@ -69,7 +72,7 @@ function drawScene(gl: WebGLRenderingContext, programInfo: any, buffers: any) {
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
     gl.vertexAttribPointer(
       programInfo.attribLocations.vertexPosition,
-      2,
+      3,
       gl.FLOAT,
       false,
       0,
@@ -82,6 +85,37 @@ function drawScene(gl: WebGLRenderingContext, programInfo: any, buffers: any) {
 }
 
 const Skyfield: React.FC = () => {
+  const [rot1, setRot1] = useState<vec3>(vec3.fromValues(0, 1, 0));
+  const [rot2, setRot2] = useState<vec3>(vec3.fromValues(1, 0, 0));
+  const [orientation, setOrientation] = useState<mat4>(mat4.create());
+
+  const rotate = (axisTheta: number, axisAngle: number) => {
+    // calculate rotation axis
+    const rotAxis = vec3.create();
+    const weightedRot1 = vec3.create();
+    const weightedRot2 = vec3.create();
+    vec3.scale(weightedRot1, rot1, Math.cos(axisTheta));
+    vec3.scale(weightedRot2, rot2, Math.sin(axisTheta));
+    vec3.add(rotAxis, weightedRot1, weightedRot2);
+
+    // calculate rotation matrix
+    const rotMat = mat4.create();
+    mat4.fromRotation(rotMat, axisAngle, rotAxis);
+
+    // mutate rot1, rot2
+    const newRot1 = vec3.clone(rot1);
+    const newRot2 = vec3.clone(rot2);
+    vec3.transformMat4(newRot1, newRot1, rotMat);
+    vec3.transformMat4(newRot2, newRot2, rotMat);
+    setRot1(newRot1);
+    setRot2(newRot2);
+
+    // mutate orientation
+    const newOrientation = mat4.create();
+    mat4.multiply(newOrientation, rotMat, orientation);
+    setOrientation(newOrientation);
+  };
+
   useEffect(() => {
     const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
     canvas.width = window.innerWidth;
@@ -123,10 +157,22 @@ const Skyfield: React.FC = () => {
       },
     };
     let buffers = initBuffers(gl);
-    drawScene(gl, programInfo, buffers);
-  }, []);
+    drawScene(gl, programInfo, buffers, orientation);
+  }, [orientation]);
 
-  return <canvas style={{ position: "fixed" }} id="canvas"></canvas>;
+  return (
+    <>
+      <canvas style={{ position: "fixed", zIndex: -1 }} id="canvas"></canvas>
+      <button
+        style={{ zIndex: 1 }}
+        onClick={() => {
+          rotate((4 * Math.PI) / 8, 0.01);
+        }}
+      >
+        rotate
+      </button>
+    </>
+  );
 };
 
 export default Skyfield;
