@@ -85,9 +85,33 @@ function drawScene(
 }
 
 const Skyfield: React.FC = () => {
+  const [gl, setGl] = useState<WebGLRenderingContext | null>();
+  const [programInfo, setProgramInfo] = useState<any>();
+  const [buffers, setBuffers] = useState<{ stars: WebGLBuffer[] }>();
+
   const [rot1, setRot1] = useState<vec3>(vec3.fromValues(0, 1, 0));
   const [rot2, setRot2] = useState<vec3>(vec3.fromValues(1, 0, 0));
   const [orientation, setOrientation] = useState<mat4>(mat4.create());
+
+  const [tPrev, setTPrev] = useState<DOMHighResTimeStamp>(0);
+  const [timer, setTimer] = useState(0);
+
+  useEffect(() => {
+    requestAnimationFrame((tNow: any) => {
+      let dt = tNow - tPrev;
+      if (dt > 10) {
+        console.log("hi");
+        setTPrev(tNow);
+        rotate(0, dt / 16000);
+      }
+    });
+  }, [timer]);
+
+  useEffect(() => {
+    setInterval(() => {
+      setTimer((p) => p + 1);
+    }, 10);
+  }, []);
 
   const rotate = (axisTheta: number, axisAngle: number) => {
     // calculate rotation axis
@@ -120,12 +144,19 @@ const Skyfield: React.FC = () => {
     const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-
-    const gl = canvas.getContext("webgl");
-    if (gl === null)
-      return console.error(
+    const glContext = canvas.getContext("webgl");
+    if (!glContext) {
+      console.error(
         "WebGL not supported, some elements may not render correctly"
       );
+      return;
+    }
+    setGl(glContext);
+  }, []);
+
+  useEffect(() => {
+    if (!gl) return;
+
     const vsSource = `
       attribute vec4 aPosition;
   
@@ -146,7 +177,7 @@ const Skyfield: React.FC = () => {
     const shaderProgram = loadShaderProgram(gl, vsSource, fsSource);
     if (!shaderProgram) return;
 
-    const programInfo = {
+    setProgramInfo({
       attribLocations: {
         aPosition: gl.getAttribLocation(shaderProgram, "aPosition"),
       },
@@ -155,22 +186,18 @@ const Skyfield: React.FC = () => {
         uModel: gl.getUniformLocation(shaderProgram, "uModel"),
         uView: gl.getUniformLocation(shaderProgram, "uView"),
       },
-    };
-    let buffers = initBuffers(gl);
+    });
+    setBuffers(initBuffers(gl));
+  }, [gl]);
+
+  useEffect(() => {
+    if (!gl || !buffers) return;
     drawScene(gl, programInfo, buffers, orientation);
   }, [orientation]);
 
   return (
     <>
       <canvas style={{ position: "fixed", zIndex: -1 }} id="canvas"></canvas>
-      <button
-        style={{ zIndex: 1 }}
-        onClick={() => {
-          rotate((4 * Math.PI) / 8, 0.01);
-        }}
-      >
-        rotate
-      </button>
     </>
   );
 };
