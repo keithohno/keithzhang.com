@@ -9,40 +9,36 @@ const stars = [
   [0.5, 0.5, -2.0, 0.02],
 ];
 
-const STAR_VERTS = 12;
-
 function initBuffers(gl: WebGLRenderingContext) {
-  let starBuffers = [];
-
+  // split data into separate arrays
+  let positionData = [];
+  let sizeData = [];
   for (const star of stars) {
-    // create and bind buffer
-    const starBuffer = gl.createBuffer()!;
-    gl.bindBuffer(gl.ARRAY_BUFFER, starBuffer);
-    // calculate data
-    let vertices: number[] = [];
-    for (let i = 0; i < STAR_VERTS; i += 1) {
-      vertices.push(
-        star[0] + star[3] * Math.cos((2 * Math.PI * i) / STAR_VERTS)
-      );
-      vertices.push(
-        star[1] + star[3] * Math.sin((2 * Math.PI * i) / STAR_VERTS)
-      );
-      vertices.push(star[2]);
-    }
-    // buffer data
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-    starBuffers.push(starBuffer);
+    positionData.push(star[0]);
+    positionData.push(star[1]);
+    positionData.push(star[2]);
+    sizeData.push(star[3]);
   }
 
-  return {
-    stars: starBuffers,
-  };
+  // load data into buffers
+  const positions = gl.createBuffer()!;
+  gl.bindBuffer(gl.ARRAY_BUFFER, positions);
+  gl.bufferData(
+    gl.ARRAY_BUFFER,
+    new Float32Array(positionData),
+    gl.STATIC_DRAW
+  );
+  const sizes = gl.createBuffer()!;
+  gl.bindBuffer(gl.ARRAY_BUFFER, sizes);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(sizeData), gl.STATIC_DRAW);
+
+  return { positions, sizes };
 }
 
 function drawScene(
   gl: WebGLRenderingContext,
-  programInfo: any,
-  buffers: { stars: WebGLBuffer[] },
+  uniforms: any,
+  buffer: { positions: WebGLBuffer; sizes: WebGLBuffer },
   orientation: mat4
 ) {
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -59,35 +55,31 @@ function drawScene(
   mat4.translate(viewMatrix, viewMatrix, [0.0, 0.0, 0.0]);
 
   // set uniforms
-  gl.uniformMatrix4fv(
-    programInfo.uniformLocations.uProjection,
-    false,
-    projectionMatrix
-  );
-  gl.uniformMatrix4fv(programInfo.uniformLocations.uModel, false, orientation);
-  gl.uniformMatrix4fv(programInfo.uniformLocations.uView, false, viewMatrix);
+  gl.uniformMatrix4fv(uniforms.uProjection, false, projectionMatrix);
+  gl.uniformMatrix4fv(uniforms.uModel, false, orientation);
+  gl.uniformMatrix4fv(uniforms.uView, false, viewMatrix);
 
-  for (const buffer of buffers.stars) {
-    // specify vertex attribute format
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.vertexAttribPointer(
-      programInfo.attribLocations.vertexPosition,
-      3,
-      gl.FLOAT,
-      false,
-      0,
-      0
-    );
-    gl.enableVertexAttribArray(programInfo.attribLocations.vertexPosition);
-    // draw
-    gl.drawArrays(gl.TRIANGLE_FAN, 0, STAR_VERTS);
-  }
+  // format of position buffer
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer.positions);
+  gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 0, 0);
+  gl.enableVertexAttribArray(0);
+
+  // format of size buffer
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer.sizes);
+  gl.vertexAttribPointer(1, 1, gl.FLOAT, false, 0, 0);
+  gl.enableVertexAttribArray(1);
+
+  // draw
+  gl.drawArrays(gl.POINTS, 0, 3);
 }
 
 const Skyfield: React.FC = () => {
   const [gl, setGl] = useState<WebGLRenderingContext | null>();
-  const [programInfo, setProgramInfo] = useState<any>();
-  const [buffers, setBuffers] = useState<{ stars: WebGLBuffer[] }>();
+  const [uniforms, setUniforms] = useState<any>();
+  const [buffers, setBuffers] = useState<{
+    positions: WebGLBuffer;
+    sizes: WebGLBuffer;
+  }>();
 
   const [rot1, setRot1] = useState<vec3>(vec3.fromValues(0, 1, 0));
   const [rot2, setRot2] = useState<vec3>(vec3.fromValues(1, 0, 0));
@@ -100,7 +92,6 @@ const Skyfield: React.FC = () => {
     requestAnimationFrame((tNow: any) => {
       let dt = tNow - tPrev;
       if (dt > 10) {
-        console.log("hi");
         setTPrev(tNow);
         rotate(0, dt / 16000);
       }
@@ -157,8 +148,10 @@ const Skyfield: React.FC = () => {
   useEffect(() => {
     if (!gl) return;
 
+    // shaders
     const vsSource = `
       attribute vec4 aPosition;
+      attribute float aSize;
   
       uniform mat4 uModel;
       uniform mat4 uView;
@@ -166,39 +159,47 @@ const Skyfield: React.FC = () => {
   
       void main() {
         gl_Position = uProjection * uModel * uView * aPosition;
+        gl_PointSize = aSize;
       }
     `;
     const fsSource = `
+      precision lowp float;
+
       void main() {
-        gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+        vec2 xy_norm = 2.0 * gl_PointCoord - 1.0;
+        if (dot(xy_norm, xy_norm) > 1.0) {
+            discard;
+        }
+        gl_FragColor = vec4(1.0, 1.0, 1.0, 0.6);
       }
     `;
 
     const shaderProgram = loadShaderProgram(gl, vsSource, fsSource);
     if (!shaderProgram) return;
 
-    setProgramInfo({
-      attribLocations: {
-        aPosition: gl.getAttribLocation(shaderProgram, "aPosition"),
-      },
-      uniformLocations: {
-        uProjection: gl.getUniformLocation(shaderProgram, "uProjection"),
-        uModel: gl.getUniformLocation(shaderProgram, "uModel"),
-        uView: gl.getUniformLocation(shaderProgram, "uView"),
-      },
+    // shader uniform locations
+    setUniforms({
+      uProjection: gl.getUniformLocation(shaderProgram, "uProjection"),
+      uModel: gl.getUniformLocation(shaderProgram, "uModel"),
+      uView: gl.getUniformLocation(shaderProgram, "uView"),
     });
+
+    // enable alpha
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+    // buffer init
     setBuffers(initBuffers(gl));
   }, [gl]);
 
+  // rerender on every orientation change
   useEffect(() => {
     if (!gl || !buffers) return;
-    drawScene(gl, programInfo, buffers, orientation);
+    drawScene(gl, uniforms, buffers, orientation);
   }, [orientation]);
 
   return (
-    <>
-      <canvas style={{ position: "fixed", zIndex: -1 }} id="canvas"></canvas>
-    </>
+    <canvas style={{ position: "fixed", zIndex: -1 }} id="canvas"></canvas>
   );
 };
 
