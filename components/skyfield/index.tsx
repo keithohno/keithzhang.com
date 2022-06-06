@@ -184,6 +184,13 @@ const Skyfield: React.FC = () => {
       return;
     }
     setGl(glContext);
+    glContext.viewport(0, 0, window.innerWidth, window.innerHeight);
+
+    window.addEventListener("resize", () => {
+      glContext.viewport(0, 0, window.innerWidth, window.innerHeight);
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
   }, []);
 
   useEffect(() => {
