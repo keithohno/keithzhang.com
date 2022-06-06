@@ -3,21 +3,19 @@ import { mat4, vec3, quat } from "gl-matrix";
 
 import { loadShaderProgram } from "../shader";
 
-const stars = [
-  [1.0, 0.0, -3.0, 0.02],
-  [0.0, -1.0, -4.0, 0.02],
-  [0.5, 0.5, -2.0, 0.02],
-];
+const RADIUS = 4.0;
 
-function initBuffers(gl: WebGLRenderingContext) {
-  // split data into separate arrays
-  let positionData = [];
-  let sizeData = [];
-  for (const star of stars) {
-    positionData.push(star[0]);
-    positionData.push(star[1]);
-    positionData.push(star[2]);
-    sizeData.push(star[3]);
+const initBuffers = async (gl: WebGLRenderingContext) => {
+  // fetch binary data
+  let positionData: number[] = [];
+  let sizeData: number[] = [];
+  const res = await (await (await fetch("BSC5ra-small")).blob()).arrayBuffer();
+  for (let i = 0; i < res.byteLength; i += 19) {
+    let floats = new Float64Array(res.slice(i, i + 16));
+    positionData.push(RADIUS * Math.cos(floats[0]) * Math.cos(floats[1]));
+    positionData.push(RADIUS * Math.sin(floats[0]) * Math.cos(floats[1]));
+    positionData.push(RADIUS * Math.sin(floats[1]));
+    sizeData.push(5);
   }
 
   // load data into buffers
@@ -31,9 +29,8 @@ function initBuffers(gl: WebGLRenderingContext) {
   const sizes = gl.createBuffer()!;
   gl.bindBuffer(gl.ARRAY_BUFFER, sizes);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(sizeData), gl.STATIC_DRAW);
-
   return { positions, sizes };
-}
+};
 
 function drawScene(
   gl: WebGLRenderingContext,
@@ -45,7 +42,7 @@ function drawScene(
   gl.clear(gl.COLOR_BUFFER_BIT);
 
   // perspective matrix
-  const fov = (45 * Math.PI) / 180;
+  const fov = (70 * Math.PI) / 180;
   const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
   const projectionMatrix = mat4.create();
   mat4.perspective(projectionMatrix, fov, aspect, 0.1, 100.0);
@@ -70,7 +67,7 @@ function drawScene(
   gl.enableVertexAttribArray(1);
 
   // draw
-  gl.drawArrays(gl.POINTS, 0, 3);
+  gl.drawArrays(gl.POINTS, 0, 2000);
 }
 
 const Skyfield: React.FC = () => {
@@ -148,6 +145,15 @@ const Skyfield: React.FC = () => {
   useEffect(() => {
     if (!gl) return;
 
+    // buffer init
+    initBuffers(gl).then((res) => {
+      setBuffers(res);
+    });
+  }, [gl]);
+
+  useEffect(() => {
+    if (!gl) return;
+
     // shaders
     const vsSource = `
       attribute vec4 aPosition;
@@ -187,16 +193,13 @@ const Skyfield: React.FC = () => {
     // enable alpha
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-
-    // buffer init
-    setBuffers(initBuffers(gl));
   }, [gl]);
 
   // rerender on every orientation change
   useEffect(() => {
     if (!gl || !buffers) return;
     drawScene(gl, uniforms, buffers, orientation);
-  }, [orientation]);
+  }, [orientation, buffers]);
 
   return (
     <canvas style={{ position: "fixed", zIndex: -1 }} id="canvas"></canvas>
