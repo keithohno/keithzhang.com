@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { mat4, vec3, quat } from "gl-matrix";
+import { mat4, vec3 } from "gl-matrix";
+import styled from "@emotion/styled";
 
 import { loadShaderProgram } from "../shader";
 
@@ -76,7 +77,7 @@ function drawScene(
   buffer: { positions: WebGLBuffer; sizes: WebGLBuffer; colors: WebGLBuffer },
   orientation: mat4
 ) {
-  gl.clearColor(0.0, 0.02, 0.04, 1.0);
+  gl.clearColor(0.0, 0.0, 0.0, 0.0);
   gl.clear(gl.COLOR_BUFFER_BIT);
 
   // perspective matrix
@@ -134,7 +135,7 @@ const Skyfield: React.FC = () => {
       let dt = tNow - tPrev;
       if (dt > 10) {
         setTPrev(tNow);
-        rotate(0, dt / 16000);
+        rotate(0, dt / 36000);
       }
     });
   }, [timer]);
@@ -260,8 +261,20 @@ const Skyfield: React.FC = () => {
   }, [orientation, buffers]);
 
   return (
-    <canvas style={{ position: "fixed", zIndex: -1 }} id="canvas"></canvas>
+    <>
+      <Background>
+        <canvas id="canvas" />
+      </Background>
+    </>
   );
 };
+
+const Background = styled.div`
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: -1;
+  background-image: linear-gradient(black, #07182a);
+`;
 
 export default Skyfield;
