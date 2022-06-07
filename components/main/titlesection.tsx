@@ -1,38 +1,29 @@
 import styled from "@emotion/styled";
 
-const Title: React.FC = () => {
+const TitleSection: React.FC = () => {
   return (
-    <Main>
-      <Panel>
-        <Small>Hi! my name is</Small>
-        <Big>Keith Zhang</Big>
-        <Me src="/ME.png" />
-        <Small>
-          I am a computer science graduate with an emphasis on
-          <strong> full stack web development</strong>. I value
-          <Yellow> excellence</Yellow>, <Pink>compassion</Pink>, and
-          <Blue> character</Blue> in all areas of work and of life.
-        </Small>
-      </Panel>
+    <Main id="titlesection">
+      <Small>Hi! my name is</Small>
+      <Big>Keith Zhang</Big>
+      <Me src="/ME.png" />
+      <Small>
+        I am a computer science graduate with an emphasis on
+        <strong> full stack web development</strong>. I value
+        <Yellow> excellence</Yellow>, <Pink>compassion</Pink>, and
+        <Green> growth</Green> in all areas of work and of life.
+      </Small>
+      <Tiny>
+        This website is a work in progress, please pardon my appearance!
+      </Tiny>
     </Main>
   );
 };
 
 const Main = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
-  max-width: calc(16vw + 300px);
-  padding-left: 6px;
-  padding-right: 6px;
-`;
-
-const Panel = styled.div`
-  width: 100%;
-  height: 90vh;
-  margin-bottom: 10vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   color: #cacac9;
 `;
@@ -49,16 +40,21 @@ const Small = styled.p`
   font-size: calc(20px + 0.5vw);
 `;
 
-const Blue = styled.span`
-  color: #c0cfff;
+const Tiny = styled.p`
+  margin: 20px;
+  font-size: calc(10px + 0.2vw);
+`;
+
+const Green = styled.span`
+  color: #c0ffcf;
 `;
 
 const Yellow = styled.span`
-  color: #ffe0c0;
+  color: #ffe0b6;
 `;
 
 const Pink = styled.span`
-  color: #ffc9df;
+  color: #ffc6dc;
 `;
 
 const Me = styled.img`
@@ -80,4 +76,4 @@ const Me = styled.img`
   }
 `;
 
-export default Title;
+export default TitleSection;
