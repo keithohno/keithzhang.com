@@ -31,6 +31,7 @@ const MainOuter = styled.div`
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
+  gap: 30px;
 `;
 
 const MainInner = styled.div`

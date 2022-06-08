@@ -62,18 +62,6 @@ const Me = styled.img`
   width: calc(120px + 3vw);
   height: calc(120px + 3vw);
   border-radius: 50%;
-  animation: pulse 3s infinite;
-  @keyframes pulse {
-    0% {
-      box-shadow: 0 0 rgba(255, 238, 204, 0);
-    }
-    50% {
-      box-shadow: 0 0 rgba(255, 238, 204, 1);
-    }
-    100% {
-      box-shadow: 0 0 0 10px rgba(255, 238, 204, 0);
-    }
-  }
 `;
 
 export default TitleSection;
