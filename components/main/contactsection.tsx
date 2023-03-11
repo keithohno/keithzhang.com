@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 const ContactSection: React.FC = () => {
   return (
-    <Main id="contactsection">Contact me at keith.zhang.cd[at]gmail.com!</Main>
+    <Main id="contactsection">Contact me at keith.zhang.cs[at]gmail[dot]com!</Main>
   );
 };
 
