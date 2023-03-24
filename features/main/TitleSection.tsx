@@ -8,10 +8,8 @@ const TitleSection: React.FC = () => {
       <Big>Keith Zhang</Big>
       <Me src="/ME.png" />
       <Small>
-        I am a computer science graduate with an emphasis on
-        <strong> full stack web development</strong>. I value
-        <Yellow> excellence</Yellow>, <Pink>compassion</Pink>, and
-        <Green> growth</Green> in all areas of work and of life.
+        and I'm a software engineer based in NYC with a background in
+        <strong> full stack web development</strong>.
       </Small>
       <Tiny>
         03/24: This website is a work in progress, please pardon my appearance!
@@ -28,6 +26,8 @@ const Big = styled.div`
 `;
 
 const Small = styled.p`
+  font-family: KoHo;
+  font-weight: 500;
   margin: 3px;
   font-size: calc(20px + 0.5vw);
 `;
@@ -35,18 +35,6 @@ const Small = styled.p`
 const Tiny = styled.p`
   margin: 20px;
   font-size: calc(10px + 0.2vw);
-`;
-
-const Green = styled.span`
-  color: #c0ffcf;
-`;
-
-const Yellow = styled.span`
-  color: #ffe0b6;
-`;
-
-const Pink = styled.span`
-  color: #ffc6dc;
 `;
 
 const Me = styled.img`

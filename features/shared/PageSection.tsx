@@ -1,24 +1,11 @@
-import React, { PropsWithChildren } from "react";
+import styled from "@emotion/styled";
 
-type PageSectionProps = React.PropsWithChildren<{
-  id: string;
-}>;
-
-export const PageSection: React.FC<PageSectionProps> = ({ children, id }) => {
-  return (
-    <div
-      style={{
-        minHeight: "100vh",
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        color: "#cacac9",
-        fontSize: "calc(16px + 0.2vw)",
-      }}
-      id={id}
-    >
-      {children}
-    </div>
-  );
-};
+export const PageSection = styled.div`
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #e5e5e0;
+  font-size: calc(16px + 0.2vw);
+`;
