@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
+import { PageSection } from "../shared/PageSection";
 
 const ProjectSection: React.FC = () => {
   return (
-    <Main id="projectsection">
+    <PageSection id="projectsection">
       <p>Here are a few things I'm proud of:</p>
       <p>
         <strong>
@@ -31,19 +32,9 @@ const ProjectSection: React.FC = () => {
         -- simple, searchable recipe catalog. Populated using a web scraper.
         Technologies used: <strong>Flask, Vue, MongoDB</strong>
       </p>
-    </Main>
+    </PageSection>
   );
 };
-
-const Main = styled.div`
-  min-height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: #cacac9;
-  font-size: calc(16px + 0.2vw);
-`;
 
 const Link = styled.a`
   color: #c0cfff;

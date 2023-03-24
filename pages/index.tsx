@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import Main from "../components/main";
-import Skyfield from "../components/skyfield";
+import Main from "../features/main";
+import Skyfield from "../features/skyfield";
 import { Global, css } from "@emotion/react";
 
 const Home: NextPage = () => {

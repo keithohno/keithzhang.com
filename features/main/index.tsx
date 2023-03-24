@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 
-import TitleSection from "./titlesection";
-import ProjectSection from "./projectsection";
-import StarSection from "./starsection";
-import ContactSection from "./contactsection";
-import Tabs from "./tabs";
+import TitleSection from "./TitleSection";
+import ProjectSection from "./ProjectSection";
+import StarSection from "./StarSection";
+import ContactSection from "./ContactSection";
+import Tabs from "./Tabs";
 
 const Main: React.FC = () => {
   const [tabsShown, setTabsShown] = useState(false);

@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
+import { PageSection } from "../shared/PageSection";
 
 const TitleSection: React.FC = () => {
   return (
-    <Main id="titlesection">
+    <PageSection id="titlesection">
       <Small>Hi! my name is</Small>
       <Big>Keith Zhang</Big>
       <Me src="/ME.png" />
@@ -13,20 +14,11 @@ const TitleSection: React.FC = () => {
         <Green> growth</Green> in all areas of work and of life.
       </Small>
       <Tiny>
-        This website is a work in progress, please pardon my appearance!
+        03/24: This website is a work in progress, please pardon my appearance!
       </Tiny>
-    </Main>
+    </PageSection>
   );
 };
-
-const Main = styled.div`
-  min-height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: #cacac9;
-`;
 
 const Big = styled.div`
   font-family: KoHo;
