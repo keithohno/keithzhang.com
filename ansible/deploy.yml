@@ -1,0 +1,37 @@
+---
+- hosts: all
+  remote_user: ubuntu
+  become: true
+
+  tasks:
+    - name: install packages
+      apt:
+        name:
+          - nginx
+          - git
+        state: present
+        update_cache: true
+
+    - name: copy nginx config
+      copy:
+        src: nginx-conf
+        dest: /etc/nginx/sites-available/default
+
+    - name: pull keithzhang.com repo
+      git:
+        repo: https://github.com/keithohno/keithzhang.com.git
+        dest: /home/keith/keithzhang.com
+        force: yes
+
+    - name: install certbot
+      snap:
+        name: certbot
+        classic: yes
+
+    - name: run certbot
+      command: certbot --nginx --non-interactive --agree-tos -m keith.zhang.cs@gmail.com -d keithzhang.com
+
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted

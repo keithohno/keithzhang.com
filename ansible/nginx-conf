@@ -1,0 +1,12 @@
+
+server {
+    listen 80;
+
+    server_name keithzhang.com;
+    charset utf-8;
+
+    location / {
+        root /home/keith/keithzhang.com/out;
+        try_files $uri $uri/ /index.html;
+    }
+}
