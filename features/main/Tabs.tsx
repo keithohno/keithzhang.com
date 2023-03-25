@@ -55,6 +55,8 @@ const Tabs: React.FC = () => {
 
 const Main = styled.div`
   height: 100vh;
+  position: fixed;
+  top: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;

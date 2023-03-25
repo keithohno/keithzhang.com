@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 
 import TitleSection from "./TitleSection";
@@ -8,41 +7,42 @@ import ContactSection from "./ContactSection";
 import Tabs from "./Tabs";
 
 const Main: React.FC = () => {
-  const [tabsShown, setTabsShown] = useState(false);
-  useEffect(() => {
-    if (window.innerWidth > 500) setTabsShown(true);
-  });
   return (
-    <MainOuter>
-      <MainInner>
+    <Outer>
+      <InnerLeft>
         <TitleSection />
         <ProjectSection />
         <StarSection />
         <ContactSection />
-      </MainInner>
-      {tabsShown && <Tabs />}
-    </MainOuter>
+      </InnerLeft>
+      <InnerRight>
+        <Tabs />
+      </InnerRight>
+    </Outer>
   );
 };
 
-const MainOuter = styled.div`
+const Outer = styled.div`
   width: 100vw;
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: stretch;
   justify-content: center;
-  gap: 30px;
+  gap: 1rem;
 `;
 
-const MainInner = styled.div`
-  height: 100vh;
-  max-width: calc(16vw + 300px);
-  padding-left: 8px;
-  padding-right: 8px;
-  overflow-y: scroll;
+const InnerLeft = styled.div`
+  position: relative;
+  width: calc(18vw + 18rem);
+  padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
-  ::-webkit-scrollbar {
+`;
+
+const InnerRight = styled.div`
+  position: relative;
+  width: calc(2vw + 6rem);
+  @media (max-width: 600px) {
     display: none;
   }
 `;
