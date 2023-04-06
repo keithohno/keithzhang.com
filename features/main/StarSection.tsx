@@ -1,5 +1,5 @@
 import { PageSection } from "../shared/PageSection";
-import { IStarfieldParams, useStarfield } from "../skyfield/context";
+import { IStarfieldParams, useStarfield } from "../starfield/context";
 import React from "react";
 
 interface ParamSliderProps {

@@ -96,7 +96,7 @@ function drawScene(
   gl.drawArrays(gl.POINTS, 0, 2000);
 }
 
-const Skyfield: React.FC = () => {
+const Starfield: React.FC = () => {
   const { gl } = useGl("canvas");
   const [uniforms, setUniforms] = useState<any>();
   const [buffers, setBuffers] = useState<{
@@ -189,4 +189,4 @@ const Background = styled.div`
   background-image: linear-gradient(black, #07182a);
 `;
 
-export default Skyfield;
+export default Starfield;
