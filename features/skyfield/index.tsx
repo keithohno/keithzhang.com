@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 
 import { loadShaderProgram } from "../shader";
 import { useStarfield } from "./context";
+import { useGl } from "./hooks";
 
 const RADIUS = 4.0;
 
@@ -125,7 +126,7 @@ function drawScene(
 }
 
 const Skyfield: React.FC = () => {
-  const [gl, setGl] = useState<WebGLRenderingContext | null>();
+  const { gl } = useGl("canvas");
   const [uniforms, setUniforms] = useState<any>();
   const [buffers, setBuffers] = useState<{
     positions: WebGLBuffer;
@@ -166,27 +167,6 @@ const Skyfield: React.FC = () => {
     mat4.multiply(newOrientation, rotMat, orientation);
     setOrientation(newOrientation);
   };
-
-  useEffect(() => {
-    const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const glContext = canvas.getContext("webgl");
-    if (!glContext) {
-      console.error(
-        "WebGL not supported, some elements may not render correctly"
-      );
-      return;
-    }
-    setGl(glContext);
-    glContext.viewport(0, 0, window.innerWidth, window.innerHeight);
-
-    window.addEventListener("resize", () => {
-      glContext.viewport(0, 0, window.innerWidth, window.innerHeight);
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
-  }, []);
 
   useEffect(() => {
     if (!gl) return;
