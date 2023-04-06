@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Main from "../features/main";
 import Skyfield from "../features/skyfield";
 import { Global, css } from "@emotion/react";
+import { StarfieldProvider } from "../features/skyfield/context";
 
 const Home: NextPage = () => {
   return (
@@ -15,8 +16,10 @@ const Home: NextPage = () => {
           }
         `}
       />
-      <Skyfield />
-      <Main></Main>
+      <StarfieldProvider>
+        <Skyfield />
+        <Main></Main>
+      </StarfieldProvider>
     </>
   );
 };

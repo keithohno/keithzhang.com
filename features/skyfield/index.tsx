@@ -3,6 +3,7 @@ import { mat4, vec3 } from "gl-matrix";
 import styled from "@emotion/styled";
 
 import { loadShaderProgram } from "../shader";
+import { useStarfield } from "./context";
 
 const RADIUS = 4.0;
 
@@ -75,25 +76,34 @@ function drawScene(
   gl: WebGLRenderingContext,
   uniforms: any,
   buffer: { positions: WebGLBuffer; sizes: WebGLBuffer; colors: WebGLBuffer },
-  orientation: mat4
+  orientation: mat4,
+  zOffset: number
 ) {
   gl.clearColor(0.0, 0.0, 0.0, 0.0);
   gl.clear(gl.COLOR_BUFFER_BIT);
 
   // perspective matrix
-  const fov = (70 * Math.PI) / 180;
+  const fov = (50 * Math.PI) / 180;
   const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
   const projectionMatrix = mat4.create();
-  mat4.perspective(projectionMatrix, fov, aspect, 0.1, 100.0);
+  const nearClippingPlane = 0.1;
+  const farClippingPlane = 100.0;
+  mat4.perspective(
+    projectionMatrix,
+    fov,
+    aspect,
+    nearClippingPlane,
+    farClippingPlane
+  );
 
   // view matrix
   const viewMatrix = mat4.create();
-  mat4.translate(viewMatrix, viewMatrix, [0.0, 0.0, 0.0]);
+  mat4.translate(viewMatrix, viewMatrix, [0.0, 0.0, -zOffset]);
 
   // set uniforms
   gl.uniformMatrix4fv(uniforms.uProjection, false, projectionMatrix);
-  gl.uniformMatrix4fv(uniforms.uModel, false, orientation);
   gl.uniformMatrix4fv(uniforms.uView, false, viewMatrix);
+  gl.uniformMatrix4fv(uniforms.uModel, false, orientation);
 
   // format of position buffer
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer.positions);
@@ -123,8 +133,7 @@ const Skyfield: React.FC = () => {
     colors: WebGLBuffer;
   }>();
 
-  const [rot1, setRot1] = useState<vec3>(vec3.fromValues(0, 1, 0));
-  const [rot2, setRot2] = useState<vec3>(vec3.fromValues(1, 0, 0));
+  const { rotAxisX, rotAxisY, rotAxisZ, rotPerMs, zOffset } = useStarfield();
   const [orientation, setOrientation] = useState<mat4>(mat4.create());
 
   const [tPrev, setTPrev] = useState<DOMHighResTimeStamp>(0);
@@ -135,7 +144,7 @@ const Skyfield: React.FC = () => {
       let dt = tNow - tPrev;
       if (dt > 10) {
         setTPrev(tNow);
-        rotate(0, dt / 36000);
+        rotate(dt * rotPerMs);
       }
     });
   }, [timer]);
@@ -146,26 +155,11 @@ const Skyfield: React.FC = () => {
     }, 10);
   }, []);
 
-  const rotate = (axisTheta: number, axisAngle: number) => {
-    // calculate rotation axis
-    const rotAxis = vec3.create();
-    const weightedRot1 = vec3.create();
-    const weightedRot2 = vec3.create();
-    vec3.scale(weightedRot1, rot1, Math.cos(axisTheta));
-    vec3.scale(weightedRot2, rot2, Math.sin(axisTheta));
-    vec3.add(rotAxis, weightedRot1, weightedRot2);
-
+  const rotate = (rotAmount: number) => {
     // calculate rotation matrix
     const rotMat = mat4.create();
-    mat4.fromRotation(rotMat, axisAngle, rotAxis);
-
-    // mutate rot1, rot2
-    const newRot1 = vec3.clone(rot1);
-    const newRot2 = vec3.clone(rot2);
-    vec3.transformMat4(newRot1, newRot1, rotMat);
-    vec3.transformMat4(newRot2, newRot2, rotMat);
-    setRot1(newRot1);
-    setRot2(newRot2);
+    const rotAxis = vec3.fromValues(rotAxisX, rotAxisY, rotAxisZ);
+    mat4.fromRotation(rotMat, rotAmount, rotAxis);
 
     // mutate orientation
     const newOrientation = mat4.create();
@@ -219,7 +213,7 @@ const Skyfield: React.FC = () => {
       uniform mat4 uProjection;
   
       void main() {
-        gl_Position = uProjection * uModel * uView * aPosition;
+        gl_Position = uProjection * uView * uModel * aPosition;
         gl_PointSize = aSize;
         vColor = aColor;
       }
@@ -257,7 +251,7 @@ const Skyfield: React.FC = () => {
   // rerender on every orientation change
   useEffect(() => {
     if (!gl || !buffers) return;
-    drawScene(gl, uniforms, buffers, orientation);
+    drawScene(gl, uniforms, buffers, orientation, zOffset);
   }, [orientation, buffers]);
 
   return (
