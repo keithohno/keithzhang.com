@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { mat4, vec3 } from "gl-matrix";
 import styled from "@emotion/styled";
 
-import { loadShaderProgram } from "../shader";
+import { loadShaderProgram } from "./shaders";
 import { useStarfield } from "./context";
 import { useGl } from "./hooks";
+import { colorCodeToRGBValues } from "./utils";
 
 const RADIUS = 4.0;
 
@@ -22,38 +23,8 @@ const initBuffers = async (gl: WebGLRenderingContext) => {
     let sizes = new Int16Array(res.slice(i + 16, i + 18));
     sizeData.push((sizes[0] - 610) / 6);
     // color by stellar classification
-    switch (new Uint8Array(res.slice(i + 18, i + 19))[0]) {
-      case 77:
-        colorData.push(1.0, 0.5, 0.3);
-        break;
-      case 75:
-        colorData.push(1.0, 0.7, 0.4);
-        break;
-      case 71:
-        colorData.push(1.0, 0.8, 0.7);
-        break;
-      case 70:
-        colorData.push(0.9, 0.9, 0.9);
-        break;
-      case 65:
-        colorData.push(0.7, 0.8, 1.0);
-        break;
-      case 66:
-        colorData.push(0.4, 0.7, 1.0);
-        break;
-      case 79:
-        colorData.push(0.2, 0.4, 1.0);
-        break;
-      case 83:
-      case 67:
-        colorData.push(1.0, 0.3, 0.2);
-        break;
-      case 87:
-        colorData.push(1.0, 1.0, 1.0);
-        break;
-      default:
-        colorData.push(0.9, 0.9, 0.9);
-    }
+    const colorCode = new Uint8Array(res.slice(i + 18, i + 19))[0];
+    colorData.push(...colorCodeToRGBValues(colorCode));
   }
 
   // load data into buffers
@@ -85,7 +56,7 @@ function drawScene(
 
   // perspective matrix
   const fov = (50 * Math.PI) / 180;
-  const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
+  const aspect = gl.canvas.width / gl.canvas.height;
   const projectionMatrix = mat4.create();
   const nearClippingPlane = 0.1;
   const farClippingPlane = 100.0;
@@ -180,40 +151,7 @@ const Skyfield: React.FC = () => {
   useEffect(() => {
     if (!gl) return;
 
-    // shaders
-    const vsSource = `
-      attribute vec4 aPosition;
-      attribute float aSize;
-      attribute vec3 aColor;
-      
-      varying lowp vec3 vColor;
-  
-      uniform mat4 uModel;
-      uniform mat4 uView;
-      uniform mat4 uProjection;
-  
-      void main() {
-        gl_Position = uProjection * uView * uModel * aPosition;
-        gl_PointSize = aSize;
-        vColor = aColor;
-      }
-    `;
-    const fsSource = `
-      precision lowp float;
-
-      varying lowp vec3 vColor;
-
-      void main() {
-        vec2 xy_norm = 2.0 * gl_PointCoord - 1.0;
-        float r2 = dot(xy_norm, xy_norm);
-        if (r2 > 1.0) {
-          discard;
-        }
-        gl_FragColor = vec4(vColor, 0.7 / (r2 * 45.0 + 0.5));
-      }
-    `;
-
-    const shaderProgram = loadShaderProgram(gl, vsSource, fsSource);
+    const shaderProgram = loadShaderProgram(gl);
     if (!shaderProgram) return;
 
     // shader uniform locations
