@@ -22,7 +22,7 @@ const initParams: IStarfieldParams = {
   rotAxisY: 1,
   rotAxisZ: 0,
   rotPerMs: 1 / 30000,
-  zOffset: 4,
+  zOffset: 2,
 };
 
 const StarfieldContext = createContext<IStarfieldContext>({

@@ -7,7 +7,7 @@ import { useStarfield } from "./context";
 import { useGl } from "./hooks";
 import { colorCodeToRGBValues } from "./utils";
 
-const RADIUS = 4.0;
+const DISTANCE_MOD = 1 / 100000;
 
 const initBuffers = async (gl: WebGLRenderingContext) => {
   // fetch binary data
@@ -15,15 +15,19 @@ const initBuffers = async (gl: WebGLRenderingContext) => {
   let sizeData: number[] = [];
   let colorData: number[] = [];
   const res = await (await (await fetch("BSC5ra-small")).blob()).arrayBuffer();
-  for (let i = 0; i < res.byteLength; i += 19) {
-    let floats = new Float64Array(res.slice(i, i + 16));
-    positionData.push(RADIUS * Math.cos(floats[0]) * Math.cos(floats[1]));
-    positionData.push(RADIUS * Math.sin(floats[0]) * Math.cos(floats[1]));
-    positionData.push(RADIUS * Math.sin(floats[1]));
-    let sizes = new Int16Array(res.slice(i + 16, i + 18));
+  // read binary star data from file
+  for (let i = 0; i < res.byteLength; i += 23) {
+    const r_ascension = new Float64Array(res.slice(i, i + 8))[0];
+    const declination = new Float64Array(res.slice(i + 8, i + 16))[0];
+    let distance =
+      new Float32Array(res.slice(i + 16, i + 20))[0] * DISTANCE_MOD;
+    positionData.push(distance * Math.cos(r_ascension) * Math.cos(declination));
+    positionData.push(distance * Math.sin(r_ascension) * Math.cos(declination));
+    positionData.push(distance * Math.sin(declination));
+    let sizes = new Int16Array(res.slice(i + 20, i + 22));
     sizeData.push((sizes[0] - 610) / 6);
     // color by stellar classification
-    const colorCode = new Uint8Array(res.slice(i + 18, i + 19))[0];
+    const colorCode = new Uint8Array(res.slice(i + 22, i + 23))[0];
     colorData.push(...colorCodeToRGBValues(colorCode));
   }
 
@@ -55,7 +59,7 @@ function drawScene(
   gl.clear(gl.COLOR_BUFFER_BIT);
 
   // perspective matrix
-  const fov = (50 * Math.PI) / 180;
+  const fov = (20 * Math.PI) / 180;
   const aspect = gl.canvas.width / gl.canvas.height;
   const projectionMatrix = mat4.create();
   const nearClippingPlane = 0.1;

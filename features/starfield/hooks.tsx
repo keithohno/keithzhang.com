@@ -6,7 +6,7 @@ const adjustCanvasHeight = (
 ) => {
   canvas.width = canvas.parentElement!.clientWidth;
   canvas.height = canvas.parentElement!.clientHeight;
-  glContext.viewport(0, 0, window.innerWidth, window.innerHeight);
+  glContext.viewport(0, 0, canvas.width, canvas.height);
 };
 
 export const useGl = (canvasElementId: string) => {
