@@ -87,7 +87,7 @@ function drawScene(
   gl.vertexAttribPointer(1, 1, gl.FLOAT, false, 0, 0);
   gl.enableVertexAttribArray(1);
 
-  // format of size buffer
+  // format of color buffer
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer.colors);
   gl.vertexAttribPointer(2, 3, gl.FLOAT, false, 0, 0);
   gl.enableVertexAttribArray(2);
@@ -109,22 +109,18 @@ const Starfield: React.FC = () => {
   const [orientation, setOrientation] = useState<mat4>(mat4.create());
 
   const [tPrev, setTPrev] = useState<DOMHighResTimeStamp>(0);
-  const [timer, setTimer] = useState(0);
+
+  const animate = (tNow: any) => {
+    let dt = tNow - tPrev;
+    if (dt > 10) {
+      setTPrev(tNow);
+      rotate(dt * rotPerMs);
+    }
+    requestAnimationFrame(animate);
+  };
 
   useEffect(() => {
-    requestAnimationFrame((tNow: any) => {
-      let dt = tNow - tPrev;
-      if (dt > 10) {
-        setTPrev(tNow);
-        rotate(dt * rotPerMs);
-      }
-    });
-  }, [timer]);
-
-  useEffect(() => {
-    setInterval(() => {
-      setTimer((p) => p + 1);
-    }, 10);
+    requestAnimationFrame(animate);
   }, []);
 
   const rotate = (rotAmount: number) => {
@@ -182,10 +178,11 @@ const Starfield: React.FC = () => {
 };
 
 const Background = styled.div`
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  z-index: -1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background-image: linear-gradient(black, #07182a);
 `;
 

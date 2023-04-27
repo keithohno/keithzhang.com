@@ -5,20 +5,25 @@ import ProjectSection from "./ProjectSection";
 import StarSection from "./StarSection";
 import ContactSection from "./ContactSection";
 import Tabs from "./Tabs";
+import { StarfieldProvider } from "../starfield/context";
+import Starfield from "../starfield";
 
 const Main: React.FC = () => {
   return (
-    <Outer>
-      <InnerLeft>
-        <TitleSection />
-        <ProjectSection />
-        <StarSection />
-        <ContactSection />
-      </InnerLeft>
-      <InnerRight>
-        <Tabs />
-      </InnerRight>
-    </Outer>
+    <StarfieldProvider>
+      <Starfield />
+      <Outer>
+        <InnerLeft>
+          <TitleSection />
+          <ProjectSection />
+          <StarSection />
+          <ContactSection />
+        </InnerLeft>
+        <InnerRight>
+          <Tabs />
+        </InnerRight>
+      </Outer>
+    </StarfieldProvider>
   );
 };
 

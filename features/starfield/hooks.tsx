@@ -4,8 +4,8 @@ const adjustCanvasHeight = (
   canvas: HTMLCanvasElement,
   glContext: WebGLRenderingContext
 ) => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.width = canvas.parentElement!.clientWidth;
+  canvas.height = canvas.parentElement!.clientHeight;
   glContext.viewport(0, 0, window.innerWidth, window.innerHeight);
 };
 

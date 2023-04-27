@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import Main from "../features/main";
+import Main from "../features/main/v2";
 import { Global, css } from "@emotion/react";
 
 const Home: NextPage = () => {
