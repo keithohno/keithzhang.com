@@ -25,14 +25,21 @@ class Star:
         self.dec = dec
         self.distance = distance
         self.magnitude = magnitude
+        self.luminosity = estimate_star_luminosity(distance, magnitude)
         self.colorcode = colorcode
 
 
 # approximate star distance using annual change in RA/DEC and DEC
-def star_motion_to_distance(delta_dec, delta_ra, dec):
+def estimate_star_distance(delta_dec, delta_ra, dec):
     delta_ra_arc_length = math.sin(dec) * delta_ra
     delta_norm = math.sqrt(delta_ra_arc_length**2 + delta_dec**2)
     return 1 / max(math.sin(delta_norm), 0.000005)
+
+
+# calculate the "innate" luminosity of a star using its apparent magnitude and distance
+# the constants here are magic numbers which make the analyze.py graphs look nice
+def estimate_star_luminosity(distance, magnitude):
+    return int(((distance + 15000) / 30000) ** (0.1) * magnitude)
 
 
 # extract raw data from BSC5 file
@@ -41,7 +48,7 @@ def extract_star_data(file_name):
     with open(file_name, mode="rb") as file:
         content = file.read()
         for entry in struct.iter_unpack(ENTRY_FORMAT, content[HEADER_LENGTH:]):
-            distance = star_motion_to_distance(entry[6], entry[7], entry[2])
+            distance = estimate_star_distance(entry[6], entry[7], entry[2])
             star = Star(entry[1], entry[2], distance, entry[5], entry[3])
             data.append(star)
         # sort by magnitude (brightness)
@@ -60,7 +67,7 @@ def write_trimmed_star_data(file_name, data):
                         star.ra,
                         star.dec,
                         star.distance,
-                        star.magnitude,
+                        star.luminosity,
                         star.colorcode,
                     )
                 )

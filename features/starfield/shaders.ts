@@ -12,7 +12,7 @@ const vsSource = `
 
   void main() {
     gl_Position = uProjection * uView * uModel * aPosition;
-    gl_PointSize = aSize;
+    gl_PointSize = aSize * (1.5 / (0.5 + gl_Position.w));
     vColor = aColor;
   }
 `;
