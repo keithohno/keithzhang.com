@@ -25,7 +25,21 @@ def plot_luminosities(data):
     plt.savefig("out/luminosities.png")
 
 
+def plot_decs(data):
+    plt.clf()
+    plt.hist([star.dec for star in data], bins=100)
+    plt.savefig("out/decs.png")
+
+
+def plot_ras(data):
+    plt.clf()
+    plt.hist([star.ra for star in data], bins=100)
+    plt.savefig("out/ras.png")
+
+
 if __name__ == "__main__":
     plot_distances(data)
     plot_magnitudes(data)
     plot_luminosities(data)
+    plot_decs(data)
+    plot_ras(data)

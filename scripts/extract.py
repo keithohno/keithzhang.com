@@ -31,7 +31,7 @@ class Star:
 
 # approximate star distance using annual change in RA/DEC and DEC
 def estimate_star_distance(delta_dec, delta_ra, dec):
-    delta_ra_arc_length = math.sin(dec) * delta_ra
+    delta_ra_arc_length = math.cos(dec) * delta_ra
     delta_norm = math.sqrt(delta_ra_arc_length**2 + delta_dec**2)
     return 1 / max(math.sin(delta_norm), 0.000005)
 
