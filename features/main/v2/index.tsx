@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 import { StarfieldProvider } from "../../starfield/context";
 import Starfield from "../../starfield";
-import TitleSection from "../TitleSection";
+import TitleSection from "./TitleSection";
 import ProjectSection from "../ProjectSection";
 import StarSection from "../StarSection";
 
@@ -58,6 +58,7 @@ const Navbar = styled.div`
 const BodyArea = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   overflow-y: scroll;
   ::-webkit-scrollbar {
     display: none;
