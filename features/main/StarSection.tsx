@@ -34,7 +34,7 @@ const ParamSlider: React.FC<ParamSliderProps> = ({
   );
 };
 
-const ProjectSection: React.FC = () => {
+const StarSection: React.FC = () => {
   return (
     <PageSection id="starsection">
       <p>
@@ -80,4 +80,4 @@ const ProjectSection: React.FC = () => {
   );
 };
 
-export default ProjectSection;
+export default StarSection;

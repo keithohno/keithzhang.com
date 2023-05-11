@@ -2,6 +2,9 @@ import styled from "@emotion/styled";
 
 import { StarfieldProvider } from "../../starfield/context";
 import Starfield from "../../starfield";
+import TitleSection from "../TitleSection";
+import ProjectSection from "../ProjectSection";
+import StarSection from "../StarSection";
 
 const Main: React.FC = () => {
   return (
@@ -9,15 +12,19 @@ const Main: React.FC = () => {
       <OuterBorderBox>
         <InnerBorderBox>
           <ContentBox>
-            <HeadingArea>
-              <Big>Keith Zhang</Big>
-              <NavigationArea>
+            <Navbar>
+              <NavbarLeft>Keith Zhang</NavbarLeft>
+              <NavbarRight>
                 <div>bio</div>
                 <div>cv</div>
                 <div>stars</div>
-              </NavigationArea>
-            </HeadingArea>
-            <BodyArea></BodyArea>
+              </NavbarRight>
+            </Navbar>
+            <BodyArea>
+              <TitleSection />
+              <ProjectSection />
+              <StarSection />
+            </BodyArea>
           </ContentBox>
           <Starfield />
         </InnerBorderBox>
@@ -26,59 +33,55 @@ const Main: React.FC = () => {
   );
 };
 
-const Big = styled.div`
-  flex-shrink: 0;
+const NavbarLeft = styled.div`
   font-family: KoHo;
-  font-size: calc(30px + 2vw);
+  font-size: 2rem;
+  font-weight: 700;
+`;
+
+const NavbarRight = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  font-family: KoHo;
+  font-size: 1.5rem;
   font-weight: 500;
 `;
 
-const HeadingArea = styled.div`
+const Navbar = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 4rem;
-  @media (max-width: 5000px) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
 `;
 
 const BodyArea = styled.div`
-  flex-grow: 1;
   display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  color: white;
-`;
-
-const NavigationArea = styled.div`
-  padding: 0.5rem;
-  display: flex;
-  gap: 1rem;
-  font-size: calc(16px + 0.5vw);
-  font-weight: 300;
-  @media (max-width: 500px) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+  flex-direction: column;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none;
   }
 `;
 
 const OuterBorderBox = styled.div`
   width: 100vw;
   height: 100vh;
-  padding: 1.5rem;
   display: flex;
   justify-content: center;
   background-image: linear-gradient(black, #040e17);
+  @media (min-width: 500px) {
+    padding: 1.5rem;
+  }
 `;
 
 const InnerBorderBox = styled.div`
-  border: 1px solid #8a8a85;
   position: relative;
   height: 100%;
   width: 100%;
+  @media (min-width: 500px) {
+    border: 1px solid #8a8a85;
+  }
 `;
 
 const ContentBox = styled.div`
