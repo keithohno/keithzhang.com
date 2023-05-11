@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { mat4, vec3 } from "gl-matrix";
 import styled from "@emotion/styled";
 
@@ -114,18 +114,19 @@ const Starfield: React.FC = () => {
 
   const [tPrev, setTPrev] = useState<DOMHighResTimeStamp>(0);
 
+  const frame = useRef(0);
   const animate = (tNow: any) => {
     let dt = tNow - tPrev;
     if (dt > 10) {
       setTPrev(tNow);
       rotate(dt * rotPerMs);
     }
-    requestAnimationFrame(animate);
+    frame.current = requestAnimationFrame(animate);
   };
-
   useEffect(() => {
     requestAnimationFrame(animate);
-  }, []);
+    return () => cancelAnimationFrame(frame.current);
+  }, [tPrev]);
 
   const rotate = (rotAmount: number) => {
     // calculate rotation matrix
