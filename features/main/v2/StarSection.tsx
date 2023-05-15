@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { IStarfieldParams, useStarfield } from "../../starfield/context";
 import { PageSectionV2 } from "../../shared/PageSection";
+import { useState } from "react";
 
 interface ParamSliderProps {
   paramName: keyof IStarfieldParams;
@@ -37,9 +38,10 @@ const ParamSlider: React.FC<ParamSliderProps> = ({
 };
 
 const StarSection: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(true);
   return (
     <PageSectionV2 id="titlesection">
-      <VFlex>
+      <VFlex style={{ visibility: isVisible ? "visible" : "hidden" }}>
         <InfoText>
           The background of this page is a realistic 3D map of the stars we see
           in the night sky. I used Yale’s BSC5 dataset to approximate the color,
@@ -110,6 +112,13 @@ const StarSection: React.FC = () => {
           </SliderSection>
         </SliderArray>
       </VFlex>
+      <VisibilityToggle onClick={() => setIsVisible(!isVisible)}>
+        {isVisible ? (
+          <VisbilityIcon src="eye-off.svg" />
+        ) : (
+          <VisbilityIcon src="eye.svg" />
+        )}
+      </VisibilityToggle>
     </PageSectionV2>
   );
 };
@@ -118,10 +127,9 @@ const VFlex = styled.div`
   width: 95%;
   max-width: 800px;
   display: flex;
+  gap: 2rem;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
-  font-family: KoHo;
 `;
 
 const SliderArray = styled.div`
@@ -151,6 +159,28 @@ const SliderLabel = styled.div`
 
 const InfoText = styled.div`
   font-size: 20px;
+`;
+
+const VisibilityToggle = styled.div`
+  position: sticky;
+  bottom: 0;
+  align-self: flex-end;
+  margin: 2rem;
+  padding: 8px;
+  height: 52px;
+  width: 52px;
+  user-select: none;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.1);
+  :hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+  }
+`;
+
+const VisbilityIcon = styled.img`
+  height: 100%;
+  width: 100%;
 `;
 
 export default StarSection;
