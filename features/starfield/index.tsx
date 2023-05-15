@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { mat4, vec3 } from "gl-matrix";
+import { ReadonlyVec3, mat4, vec3 } from "gl-matrix";
 import styled from "@emotion/styled";
 
 import { loadShaderProgram } from "./shaders";
@@ -25,7 +25,7 @@ const initBuffers = async (gl: WebGLRenderingContext) => {
     positionData.push(distance * Math.sin(r_ascension) * Math.cos(declination));
     positionData.push(distance * Math.sin(declination));
     let sizes = new Int16Array(res.slice(i + 20, i + 22));
-    sizeData.push((sizes[0] - 610) / 6);
+    sizeData.push((sizes[0] - 600) / 6);
     // color by stellar classification
     const colorCode = new Uint8Array(res.slice(i + 22, i + 23))[0];
     colorData.push(...colorCodeToRGBValues(colorCode));
@@ -53,13 +53,13 @@ function drawScene(
   uniforms: any,
   buffer: { positions: WebGLBuffer; sizes: WebGLBuffer; colors: WebGLBuffer },
   orientation: mat4,
-  zOffset: number
+  offsets: vec3,
+  fov: number
 ) {
   gl.clearColor(0.0, 0.0, 0.0, 0.0);
   gl.clear(gl.COLOR_BUFFER_BIT);
 
   // perspective matrix
-  const fov = (20 * Math.PI) / 180;
   const aspect = gl.canvas.width / gl.canvas.height;
   const projectionMatrix = mat4.create();
   const nearClippingPlane = 0.1;
@@ -74,7 +74,7 @@ function drawScene(
 
   // view matrix
   const viewMatrix = mat4.create();
-  mat4.translate(viewMatrix, viewMatrix, [0.0, 0.0, -zOffset]);
+  mat4.translate(viewMatrix, viewMatrix, offsets);
 
   // set uniforms
   gl.uniformMatrix4fv(uniforms.uProjection, false, projectionMatrix);
@@ -109,7 +109,16 @@ const Starfield: React.FC = () => {
     colors: WebGLBuffer;
   }>();
 
-  const { rotAxisX, rotAxisY, rotAxisZ, rotPerMs, zOffset } = useStarfield();
+  const {
+    rotAxisX,
+    rotAxisY,
+    rotAxisZ,
+    offsetX,
+    offsetY,
+    offsetZ,
+    sqrtRotPerMs,
+    fov,
+  } = useStarfield();
   const [orientation, setOrientation] = useState<mat4>(mat4.create());
 
   const [tPrev, setTPrev] = useState<DOMHighResTimeStamp>(0);
@@ -119,7 +128,7 @@ const Starfield: React.FC = () => {
     let dt = tNow - tPrev;
     if (dt > 10) {
       setTPrev(tNow);
-      rotate(dt * rotPerMs);
+      rotate(dt * sqrtRotPerMs ** 2);
     }
     frame.current = requestAnimationFrame(animate);
   };
@@ -170,7 +179,14 @@ const Starfield: React.FC = () => {
   // rerender on every orientation change
   useEffect(() => {
     if (!gl || !buffers) return;
-    drawScene(gl, uniforms, buffers, orientation, zOffset);
+    drawScene(
+      gl,
+      uniforms,
+      buffers,
+      orientation,
+      vec3.fromValues(offsetX, offsetY, -offsetZ),
+      fov
+    );
   }, [orientation, buffers]);
 
   return (

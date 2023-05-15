@@ -9,8 +9,11 @@ export interface IStarfieldParams {
   rotAxisX: number;
   rotAxisY: number;
   rotAxisZ: number;
-  rotPerMs: number;
-  zOffset: number;
+  offsetX: number;
+  offsetY: number;
+  offsetZ: number;
+  sqrtRotPerMs: number;
+  fov: number;
 }
 
 interface IStarfieldContext extends IStarfieldParams {
@@ -21,8 +24,11 @@ const initParams: IStarfieldParams = {
   rotAxisX: 0,
   rotAxisY: 1,
   rotAxisZ: 0,
-  rotPerMs: 1 / 30000,
-  zOffset: 2,
+  offsetX: 0,
+  offsetY: 0,
+  offsetZ: 2,
+  sqrtRotPerMs: 0.005,
+  fov: 0.3,
 };
 
 const StarfieldContext = createContext<IStarfieldContext>({

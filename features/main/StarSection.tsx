@@ -47,7 +47,7 @@ const StarSection: React.FC = () => {
         some sliders.
       </p>
       <ParamSlider
-        paramName="zOffset"
+        paramName="offsetZ"
         sliderMin={0}
         sliderMax={20}
         description="z-offset"
@@ -71,9 +71,9 @@ const StarSection: React.FC = () => {
         description="rotation axis Z"
       />
       <ParamSlider
-        paramName="rotPerMs"
+        paramName="sqrtRotPerMs"
         sliderMin={0}
-        sliderMax={0.001}
+        sliderMax={0.1}
         description="rotation speed"
       />
     </PageSection>

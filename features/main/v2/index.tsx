@@ -4,7 +4,7 @@ import { StarfieldProvider } from "../../starfield/context";
 import Starfield from "../../starfield";
 import TitleSection from "./TitleSection";
 import ProjectSection from "../ProjectSection";
-import StarSection from "../StarSection";
+import StarSection from "./StarSection";
 
 const Main: React.FC = () => {
   return (
