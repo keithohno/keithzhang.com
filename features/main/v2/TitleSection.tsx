@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { PageSectionV2 } from "../../shared/PageSection";
+import { Github, Linkedin } from "../../shared/Icons";
 
 const TitleSection: React.FC = () => {
   return (
@@ -17,10 +18,14 @@ const TitleSection: React.FC = () => {
           </MedText>
           <HFlexIcons>
             <a href="https://www.github.com/keithohno">
-              <IconButton src="github.svg" alt="github" />
+              <IconButton>
+                <Github />
+              </IconButton>
             </a>
             <a href="https://www.linkedin.com/in/keith-zhang">
-              <IconButton src="linkedin.svg" alt="linkedin" />
+              <IconButton>
+                <Linkedin />
+              </IconButton>
             </a>
           </HFlexIcons>
         </VFlex>
@@ -40,10 +45,13 @@ const HFlexIcons = styled.div`
   }
 `;
 
-const IconButton = styled.img`
+const IconButton = styled.div`
   box-sizing: content-box;
   width: 2rem;
   height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding-bottom: 4px;
   border-bottom: 2px solid rgb(0, 0, 0, 0);
   transition: all 0.2s ease-in-out;

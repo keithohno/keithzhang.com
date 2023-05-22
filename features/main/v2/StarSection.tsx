@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { IStarfieldParams, useStarfield } from "../../starfield/context";
 import { PageSectionV2 } from "../../shared/PageSection";
 import { useState } from "react";
+import { Eye, EyeSlash } from "../../shared/Icons";
 
 interface ParamSliderProps {
   paramName: keyof IStarfieldParams;
@@ -113,11 +114,7 @@ const StarSection: React.FC = () => {
         </SliderArray>
       </VFlex>
       <VisibilityToggle onClick={() => setIsVisible(!isVisible)}>
-        {isVisible ? (
-          <VisbilityIcon src="eye-off.svg" />
-        ) : (
-          <VisbilityIcon src="eye.svg" />
-        )}
+        {isVisible ? <EyeSlash /> : <Eye />}
       </VisibilityToggle>
     </PageSectionV2>
   );
@@ -169,6 +166,9 @@ const VisibilityToggle = styled.div`
   padding: 8px;
   height: 52px;
   width: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   user-select: none;
   border: 2px solid rgba(255, 255, 255, 0.4);
   background-color: rgba(255, 255, 255, 0.1);
@@ -177,10 +177,4 @@ const VisibilityToggle = styled.div`
     cursor: pointer;
   }
 `;
-
-const VisbilityIcon = styled.img`
-  height: 100%;
-  width: 100%;
-`;
-
 export default StarSection;
