@@ -62,6 +62,7 @@ const IconButton = styled.div`
 `;
 
 const HFlex = styled.div`
+  min-height: calc(100vh - 6rem);
   width: 95%;
   max-width: 800px;
   display: flex;

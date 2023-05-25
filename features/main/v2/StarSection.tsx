@@ -41,7 +41,7 @@ const ParamSlider: React.FC<ParamSliderProps> = ({
 const StarSection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
   return (
-    <PageSectionV2 id="titlesection">
+    <PageSectionV2 id="starsection">
       <VFlex style={{ visibility: isVisible ? "visible" : "hidden" }}>
         <InfoText>
           The background of this page is a realistic 3D map of the stars we see
@@ -121,6 +121,7 @@ const StarSection: React.FC = () => {
 };
 
 const VFlex = styled.div`
+  min-height: calc(100vh - 5rem);
   width: 95%;
   max-width: 800px;
   display: flex;

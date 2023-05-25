@@ -11,8 +11,6 @@ export const PageSection = styled.div`
 `;
 
 export const PageSectionV2 = styled.div`
-  min-height: calc(100vh - 7rem);
-  padding-bottom: 5rem;
   width: 100%;
   display: flex;
   flex-direction: column;

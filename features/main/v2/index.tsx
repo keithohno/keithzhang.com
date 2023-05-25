@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { StarfieldProvider } from "../../starfield/context";
 import Starfield from "../../starfield";
 import TitleSection from "./TitleSection";
-import ProjectSection from "../ProjectSection";
+import ProjectSection from "./ProjectSection";
 import StarSection from "./StarSection";
 
 const Main: React.FC = () => {
@@ -52,10 +52,12 @@ const NavbarRight = styled.div`
 const Navbar = styled.div`
   display: flex;
   justify-content: space-between;
-  gap: 4rem;
+  gap: 1rem;
+  margin-bottom: 10px;
 `;
 
 const BodyArea = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,6 +82,7 @@ const InnerBorderBox = styled.div`
   position: relative;
   height: 100%;
   width: 100%;
+  overflow: hidden;
   @media (min-width: 500px) {
     border: 1px solid #8a8a85;
   }
