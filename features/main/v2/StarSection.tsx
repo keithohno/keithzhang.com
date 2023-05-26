@@ -9,7 +9,7 @@ const StarSection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   return (
-    <PageSection id="starsection">
+    <PageSection id="starsection" noPadding>
       <Root>
         <InfoText
           aria-hidden={!isVisible}
