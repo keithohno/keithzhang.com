@@ -14,6 +14,7 @@ const PageSectionInner = styled.div`
   padding-bottom: 5rem;
   max-width: 800px;
 
+  font-family: KoHo;
   color: #e5e5e0;
   font-size: calc(16px + 0.2vw);
 `;
