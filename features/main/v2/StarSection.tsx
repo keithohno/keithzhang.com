@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { IStarfieldParams, useStarfield } from "../../starfield/context";
-import { PageSectionV2 } from "../../shared/PageSection";
+import { PageSection } from "../../shared/PageSection";
 import { useState } from "react";
 import { Eye, EyeSlash } from "../../shared/Icons";
 
@@ -41,7 +41,7 @@ const ParamSlider: React.FC<ParamSliderProps> = ({
 const StarSection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
   return (
-    <PageSectionV2 id="starsection">
+    <PageSection id="starsection">
       <VFlex style={{ visibility: isVisible ? "visible" : "hidden" }}>
         <InfoText>
           The background of this page is a realistic 3D map of the stars we see
@@ -116,14 +116,12 @@ const StarSection: React.FC = () => {
       <VisibilityToggle onClick={() => setIsVisible(!isVisible)}>
         {isVisible ? <EyeSlash /> : <Eye />}
       </VisibilityToggle>
-    </PageSectionV2>
+    </PageSection>
   );
 };
 
 const VFlex = styled.div`
-  min-height: calc(100vh - 5rem);
   width: 95%;
-  max-width: 800px;
   display: flex;
   gap: 2rem;
   flex-direction: column;

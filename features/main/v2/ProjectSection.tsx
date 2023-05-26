@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
-import { PageSectionV2 } from "../../shared/PageSection";
+import { PageSection } from "../../shared/PageSection";
 const ProjectSection: React.FC = () => {
   return (
-    <PageSectionV2 id="projectsection">
+    <PageSection id="projectsection">
       <ContainerThing>
         <p>Here are a few things I'm proud of:</p>
         <p>
@@ -33,7 +33,7 @@ const ProjectSection: React.FC = () => {
           Technologies used: <strong>Flask, Vue, MongoDB</strong>
         </p>
       </ContainerThing>
-    </PageSectionV2>
+    </PageSection>
   );
 };
 
@@ -41,7 +41,5 @@ const Link = styled.a`
   color: #c0cfff;
 `;
 
-const ContainerThing = styled.div`
-  min-height: calc(100vh - 5rem);
-`;
+const ContainerThing = styled.div``;
 export default ProjectSection;

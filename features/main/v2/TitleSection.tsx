@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
-import { PageSectionV2 } from "../../shared/PageSection";
+import { PageSection } from "../../shared/PageSection";
 import { Github, Linkedin } from "../../shared/Icons";
 
 const TitleSection: React.FC = () => {
   return (
-    <PageSectionV2 id="titlesection">
+    <PageSection id="titlesection">
       <HFlex>
         <Portrait src="me.jpeg" />
         <VFlex>
@@ -12,9 +12,8 @@ const TitleSection: React.FC = () => {
             Hi, my name is <strong>Keith</strong>.
           </BigText>
           <MedText>
-            And I'm a <strong>software engineer</strong> based in NYC. Currently
-            seeking new opportunities to solve complex problems, develop
-            meaningful connections, and impact the world at large.
+            And I'm a <strong>software engineer</strong> based in NYC. Always
+            learning, building, moving, dreaming.
           </MedText>
           <HFlexIcons>
             <a href="https://www.github.com/keithohno">
@@ -30,7 +29,7 @@ const TitleSection: React.FC = () => {
           </HFlexIcons>
         </VFlex>
       </HFlex>
-    </PageSectionV2>
+    </PageSection>
   );
 };
 
@@ -62,14 +61,15 @@ const IconButton = styled.div`
 `;
 
 const HFlex = styled.div`
-  min-height: calc(100vh - 6rem);
+  height: 100%;
   width: 95%;
-  max-width: 800px;
   display: flex;
   align-items: center;
+  text-align: center;
   gap: 2rem;
   @media (max-width: 600px) {
-    align-items: flex-start;
+    padding-top: 2rem;
+    // align-items: flex-start;
     flex-direction: column;
   }
 `;
