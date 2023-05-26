@@ -3,59 +3,35 @@ import { IStarfieldParams, useStarfield } from "../../starfield/context";
 import { PageSection } from "../../shared/PageSection";
 import { useState } from "react";
 import { Eye, EyeSlash } from "../../shared/Icons";
-
-interface ParamSliderProps {
-  paramName: keyof IStarfieldParams;
-  sliderMin: number;
-  sliderMax: number;
-  label?: string;
-  step?: number;
-}
-
-const ParamSlider: React.FC<ParamSliderProps> = ({
-  paramName,
-  sliderMin,
-  sliderMax,
-  label,
-  step,
-}) => {
-  const { [paramName]: paramValue, setParams } = useStarfield();
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setParams({ [paramName]: +e.currentTarget.value });
-  };
-  return (
-    <SliderContainer>
-      {label && <SliderLabel>{label}</SliderLabel>}
-      <input
-        type="range"
-        min={sliderMin}
-        max={sliderMax}
-        step={step || "any"}
-        value={paramValue}
-        onChange={onChange}
-      />
-    </SliderContainer>
-  );
-};
+import { ParamSlider } from "../../starfield/ParamSlider";
 
 const StarSection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
+
   return (
     <PageSection id="starsection">
-      <VFlex style={{ visibility: isVisible ? "visible" : "hidden" }}>
-        <InfoText>
-          The background of this page is a realistic 3D map of the stars we see
-          in the night sky. I used Yale’s BSC5 dataset to approximate the color,
-          position, and brightness of 2000 stars, which are rendered using
-          WebGL.
+      <Root>
+        <InfoText
+          aria-hidden={!isVisible}
+          style={{ visibility: isVisible ? "visible" : "hidden" }}
+        >
+          The background of this page is a realistic 3D star map. I used a
+          public dataset (Yale BSC5) to approximate the position, color, and
+          brightness of each star, all rendered with WebGL.
         </InfoText>
-        <InfoText>
+        <InfoText
+          aria-hidden={!isVisible}
+          style={{ visibility: isVisible ? "visible" : "hidden" }}
+        >
           I may add interactive controls in the future, but for now here are a
-          bunch of sliders for controlling the animation.
+          bunch of sliders and a visibility toggle:
         </InfoText>
-        <SliderArray>
-          <SliderSection>
-            <SliderSectionTitle>Rotation axis:</SliderSectionTitle>
+        <SliderCardArray
+          aria-hidden={!isVisible}
+          style={{ visibility: isVisible ? "visible" : "hidden" }}
+        >
+          <SliderCard>
+            <SliderCardTitle>Rotation axis:</SliderCardTitle>
             <ParamSlider
               paramName="rotAxisX"
               sliderMin={-1}
@@ -77,9 +53,9 @@ const StarSection: React.FC = () => {
               step={0.1}
               label="z"
             />
-          </SliderSection>
-          <SliderSection>
-            <SliderSectionTitle>Position offset:</SliderSectionTitle>
+          </SliderCard>
+          <SliderCard>
+            <SliderCardTitle>Position offset:</SliderCardTitle>
             <ParamSlider
               paramName="offsetX"
               sliderMin={-1}
@@ -98,37 +74,41 @@ const StarSection: React.FC = () => {
               sliderMax={4}
               label="z"
             />
-          </SliderSection>
-          <SliderSection>
-            <SliderSectionTitle>Rotation speed:</SliderSectionTitle>
+          </SliderCard>
+          <SliderCard>
+            <SliderCardTitle>Rotation speed:</SliderCardTitle>
             <ParamSlider
               paramName="sqrtRotPerMs"
               sliderMin={0}
               sliderMax={0.03}
             />
-          </SliderSection>
-          <SliderSection>
-            <SliderSectionTitle>FOV:</SliderSectionTitle>
+          </SliderCard>
+          <SliderCard>
+            <SliderCardTitle>FOV:</SliderCardTitle>
             <ParamSlider paramName="fov" sliderMin={0.1} sliderMax={0.5} />
-          </SliderSection>
-        </SliderArray>
-      </VFlex>
-      <VisibilityToggle onClick={() => setIsVisible(!isVisible)}>
-        {isVisible ? <EyeSlash /> : <Eye />}
-      </VisibilityToggle>
+          </SliderCard>
+        </SliderCardArray>
+        <VisibilityToggle onClick={() => setIsVisible(!isVisible)}>
+          {isVisible ? <EyeSlash /> : <Eye />}
+        </VisibilityToggle>
+      </Root>
     </PageSection>
   );
 };
 
-const VFlex = styled.div`
+const Root = styled.div`
   width: 95%;
   display: flex;
-  gap: 2rem;
   flex-direction: column;
   align-items: center;
+  gap: 2rem;
 `;
 
-const SliderArray = styled.div`
+const InfoText = styled.div`
+  font-size: 1.25rem;
+`;
+
+const SliderCardArray = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -136,38 +116,23 @@ const SliderArray = styled.div`
   gap: 1rem;
 `;
 
-const SliderSection = styled.div`
+const SliderCard = styled.div`
   padding: 0.5rem;
   border: 1px solid rgba(255, 239, 223, 0.4);
 `;
 
-const SliderSectionTitle = styled.div`
+const SliderCardTitle = styled.div`
   padding-bottom: 0.5rem;
-`;
-
-const SliderContainer = styled.div`
-  display: flex;
-`;
-
-const SliderLabel = styled.div`
-  width: 1rem;
-`;
-
-const InfoText = styled.div`
-  font-size: 20px;
 `;
 
 const VisibilityToggle = styled.div`
   position: sticky;
   bottom: 0;
-  align-self: flex-end;
-  margin: 2rem;
   padding: 8px;
   height: 52px;
   width: 52px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: center
   user-select: none;
   border: 2px solid rgba(255, 255, 255, 0.4);
   background-color: rgba(255, 255, 255, 0.1);
@@ -176,4 +141,5 @@ const VisibilityToggle = styled.div`
     cursor: pointer;
   }
 `;
+
 export default StarSection;
