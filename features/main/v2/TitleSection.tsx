@@ -1,22 +1,21 @@
 import styled from "@emotion/styled";
-import { PageSectionV2 } from "../../shared/PageSection";
+import { PageSection } from "../../shared/PageSection";
 import { Github, Linkedin } from "../../shared/Icons";
 
 const TitleSection: React.FC = () => {
   return (
-    <PageSectionV2 id="titlesection">
-      <HFlex>
+    <PageSection id="titlesection">
+      <Root>
         <Portrait src="me.jpeg" />
-        <VFlex>
+        <Bio>
           <BigText>
             Hi, my name is <strong>Keith</strong>.
           </BigText>
           <MedText>
-            And I'm a <strong>software engineer</strong> based in NYC. Currently
-            seeking new opportunities to solve complex problems, develop
-            meaningful connections, and impact the world at large.
+            And I'm a <strong>software engineer</strong> based in NYC. Always
+            learning, building, moving, dreaming.
           </MedText>
-          <HFlexIcons>
+          <SocialIcons>
             <a href="https://www.github.com/keithohno">
               <IconButton>
                 <Github />
@@ -27,48 +26,21 @@ const TitleSection: React.FC = () => {
                 <Linkedin />
               </IconButton>
             </a>
-          </HFlexIcons>
-        </VFlex>
-      </HFlex>
-    </PageSectionV2>
+          </SocialIcons>
+        </Bio>
+      </Root>
+    </PageSection>
   );
 };
 
-const HFlexIcons = styled.div`
-  align-self: center;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
-  @media (min-width: 600px) {
-    padding-right: 4rem;
-  }
-`;
-
-const IconButton = styled.div`
-  box-sizing: content-box;
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 4px;
-  border-bottom: 2px solid rgb(0, 0, 0, 0);
-  transition: all 0.2s ease-in-out;
-  :hover {
-    transform: scale(1.1);
-    border-bottom: 2px solid #fed;
-  }
-`;
-
-const HFlex = styled.div`
+const Root = styled.div`
+  height: 100%;
   width: 95%;
-  max-width: 800px;
   display: flex;
   align-items: center;
   gap: 2rem;
   @media (max-width: 600px) {
-    align-items: flex-start;
+    padding-top: 2rem;
     flex-direction: column;
   }
 `;
@@ -78,22 +50,46 @@ const Portrait = styled.img`
   height: 200px;
 `;
 
-const VFlex = styled.div`
+const Bio = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  font-family: KoHo;
+  @media (max-width: 600px) {
+    align-items: center;
+    text-align: center;
+  }
+`;
+
+const SocialIcons = styled.div`
+  display: flex;
+  gap: 1rem;
+  @media (min-width: 600px) {
+    padding-left: 1rem;
+  }
+`;
+
+const IconButton = styled.div`
+  box-sizing: content-box;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  padding-bottom: 4px;
+  border-bottom: 2px solid rgb(0, 0, 0, 0);
+  transition: all 0.2s ease-in-out;
+  :hover {
+    transform: scale(1.1);
+    border-bottom: 2px solid #e5e5e0;
+  }
 `;
 
 const BigText = styled.p`
-  font-weight: 500;
-  margin: 3px;
+  margin: auto;
   font-size: 2rem;
 `;
 
 const MedText = styled.p`
-  font-weight: 500;
-  margin: 3px;
+  margin: auto;
   font-size: 1.5rem;
 `;
 
