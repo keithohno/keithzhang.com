@@ -12,8 +12,8 @@ const TitleSection: React.FC = () => {
             Hi, my name is <strong>Keith</strong>.
           </BigText>
           <MedText>
-            And I'm a <strong>software engineer</strong> based in NYC. Always
-            learning, building, moving, dreaming.
+            ...and I'm a <strong>software engineer</strong> based in NYC! I'm
+            always learning, building, moving, dreaming.
           </MedText>
           <SocialIcons>
             <a href="https://www.github.com/keithohno">
@@ -53,7 +53,7 @@ const Portrait = styled.img`
 const Bio = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.5rem;
   @media (max-width: 600px) {
     align-items: center;
     text-align: center;
@@ -64,7 +64,7 @@ const SocialIcons = styled.div`
   display: flex;
   gap: 1rem;
   @media (min-width: 600px) {
-    padding-left: 1rem;
+    padding-right: 1rem;
   }
 `;
 
@@ -84,12 +84,11 @@ const IconButton = styled.div`
 `;
 
 const BigText = styled.p`
-  margin: auto;
+  margin: 0;
   font-size: 2rem;
 `;
 
 const MedText = styled.p`
-  margin: auto;
   font-size: 1.5rem;
 `;
 

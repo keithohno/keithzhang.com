@@ -15,9 +15,9 @@ const Main: React.FC = () => {
             <Navbar>
               <NavbarLeft>Keith Zhang</NavbarLeft>
               <NavbarRight>
-                <div>bio</div>
-                <div>cv</div>
-                <div>stars</div>
+                <NavbarLink href="#titlesection">bio</NavbarLink>
+                <NavbarLink href="#projectsection">cv</NavbarLink>
+                <NavbarLink href="#starsection">stars</NavbarLink>
               </NavbarRight>
             </Navbar>
             <BodyArea>
@@ -49,6 +49,14 @@ const NavbarRight = styled.div`
   font-weight: 500;
 `;
 
+const NavbarLink = styled.a`
+  color: #e0e0d6;
+  border-bottom: 2px solid rgb(0, 0, 0, 0);
+  :hover {
+    border-bottom: 2px solid #e5e5e0;
+  }
+`;
+
 const Navbar = styled.div`
   display: flex;
   justify-content: space-between;
@@ -65,6 +73,7 @@ const BodyArea = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
+  scroll-behavior: smooth;
 `;
 
 const OuterBorderBox = styled.div`
