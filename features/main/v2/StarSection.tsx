@@ -15,9 +15,9 @@ const StarSection: React.FC = () => {
           aria-hidden={!isVisible}
           style={{ visibility: isVisible ? "visible" : "hidden" }}
         >
-          The background of this page is a realistic 3D star map. I used a
-          public dataset (Yale BSC5) to approximate the position, color, and
-          brightness of each star, all rendered with WebGL.
+          The background of this page is a realistic 3D star map rendered with
+          WebGL. I used a public dataset (Yale BSC5) to approximate the
+          position, color, and brightness of each star.
         </InfoText>
         <InfoText
           aria-hidden={!isVisible}
@@ -88,9 +88,11 @@ const StarSection: React.FC = () => {
             <ParamSlider paramName="fov" sliderMin={0.1} sliderMax={0.5} />
           </SliderCard>
         </SliderCardArray>
-        <VisibilityToggle onClick={() => setIsVisible(!isVisible)}>
-          {isVisible ? <EyeSlash /> : <Eye />}
-        </VisibilityToggle>
+        <BottomFillContainer>
+          <VisibilityToggle onClick={() => setIsVisible(!isVisible)}>
+            {isVisible ? <EyeSlash /> : <Eye />}
+          </VisibilityToggle>
+        </BottomFillContainer>
       </Root>
     </PageSection>
   );
@@ -98,6 +100,7 @@ const StarSection: React.FC = () => {
 
 const Root = styled.div`
   width: 95%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,21 +128,29 @@ const SliderCardTitle = styled.div`
   padding-bottom: 0.5rem;
 `;
 
-const VisibilityToggle = styled.div`
+const BottomFillContainer = styled.div`
   position: sticky;
+  flex-grow: 1;
   bottom: 0;
-  padding: 8px;
-  height: 52px;
-  width: 52px;
   display: flex;
-  align-items: center
-  user-select: none;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  background-color: rgba(255, 255, 255, 0.1);
-  :hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    cursor: pointer;
-  }
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 1rem;
+`;
+
+const VisibilityToggle = styled.div`
+padding: 8px;
+height: 52px;
+width: 52px;
+display: flex;
+align-items: center
+user-select: none;
+border: 2px solid rgba(255, 255, 255, 0.4);
+background-color: rgba(255, 255, 255, 0.1);
+:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
 `;
 
 export default StarSection;
