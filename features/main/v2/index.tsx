@@ -36,7 +36,7 @@ const Main: React.FC = () => {
 const NavbarLeft = styled.div`
   font-family: KoHo;
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 500;
 `;
 
 const NavbarRight = styled.div`
@@ -46,7 +46,7 @@ const NavbarRight = styled.div`
   gap: 1rem;
   font-family: KoHo;
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: 400;
 `;
 
 const NavbarLink = styled.a`

@@ -38,6 +38,7 @@ const PageSectionInner = styled.div`
   ${dynamicPadding}
 
   font-family: KoHo;
+  font-weight: 400;
   color: #e5e5e0;
   font-size: calc(16px + 0.2vw);
 `;

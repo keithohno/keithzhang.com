@@ -86,10 +86,12 @@ const IconButton = styled.div`
 const BigText = styled.p`
   margin: 0;
   font-size: 2rem;
+  font-weight: 300;
 `;
 
 const MedText = styled.p`
   font-size: 1.5rem;
+  font-weight: 300;
 `;
 
 export default TitleSection;
