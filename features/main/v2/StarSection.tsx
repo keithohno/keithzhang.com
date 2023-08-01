@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { IStarfieldParams, useStarfield } from "../../starfield/context";
 import { PageSection } from "../../shared/PageSection";
 import { useState } from "react";
 import { Eye, EyeSlash } from "../../shared/Icons";
@@ -9,7 +8,7 @@ const StarSection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   return (
-    <PageSection id="starsection" noPadding>
+    <PageSection id="starsection">
       <Root>
         <InfoText
           aria-hidden={!isVisible}
@@ -99,7 +98,6 @@ const StarSection: React.FC = () => {
 };
 
 const Root = styled.div`
-  width: 95%;
   height: 100%;
   display: flex;
   flex-direction: column;

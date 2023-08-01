@@ -2,8 +2,7 @@ import styled from "@emotion/styled";
 
 import { StarfieldProvider } from "../../starfield/context";
 import Starfield from "../../starfield";
-import TitleSection from "./TitleSection";
-import ProjectSection from "./ProjectSection";
+import BioSection from "./BioSection";
 import StarSection from "./StarSection";
 
 const Main: React.FC = () => {
@@ -15,14 +14,12 @@ const Main: React.FC = () => {
             <Navbar>
               <NavbarLeft>Keith Zhang</NavbarLeft>
               <NavbarRight>
-                <NavbarLink href="#titlesection">bio</NavbarLink>
-                <NavbarLink href="#projectsection">cv</NavbarLink>
-                <NavbarLink href="#starsection">stars</NavbarLink>
+                <NavbarLink href="#biosection">bio</NavbarLink>
+                <NavbarLink href="#starsection">⋆｡°✩</NavbarLink>
               </NavbarRight>
             </Navbar>
             <BodyArea>
-              <TitleSection />
-              <ProjectSection />
+              <BioSection />
               <StarSection />
             </BodyArea>
           </ContentBox>

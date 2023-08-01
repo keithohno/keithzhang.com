@@ -133,7 +133,7 @@ const Starfield: React.FC = () => {
     frame.current = requestAnimationFrame(animate);
   };
   useEffect(() => {
-    requestAnimationFrame(animate);
+    frame.current = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(frame.current);
   }, [tPrev]);
 

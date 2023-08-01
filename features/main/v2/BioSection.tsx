@@ -2,9 +2,9 @@ import styled from "@emotion/styled";
 import { PageSection } from "../../shared/PageSection";
 import { Github, Linkedin } from "../../shared/Icons";
 
-const TitleSection: React.FC = () => {
+const BioSection: React.FC = () => {
   return (
-    <PageSection id="titlesection">
+    <PageSection id="biosection">
       <Root>
         <Portrait src="me.jpeg" />
         <Bio>
@@ -12,8 +12,16 @@ const TitleSection: React.FC = () => {
             Hi, my name is <strong>Keith</strong>.
           </BigText>
           <MedText>
-            ...and I'm a <strong>software engineer</strong> based in NYC! I'm
-            always learning, building, moving, dreaming.
+            ...and I'm a <strong>software engineer</strong> based in NYC. I love
+            learning new things and building cool stuff, so if you have an
+            exciting opportunity, feel free to reach out!
+          </MedText>
+          <MedText>
+            Most recently, I've been{" "}
+            <Link href="https://github.com/keithohno/learning/tree/main/ml">
+              exploring GANs and VAEs for unsupervised learning
+            </Link>
+            .
           </MedText>
           <SocialIcons>
             <a href="https://www.github.com/keithohno">
@@ -39,6 +47,7 @@ const Root = styled.div`
   display: flex;
   align-items: center;
   gap: 2rem;
+  padding-bottom: 4rem;
   @media (max-width: 600px) {
     padding-top: 2rem;
     flex-direction: column;
@@ -53,7 +62,7 @@ const Portrait = styled.img`
 const Bio = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
   @media (max-width: 600px) {
     align-items: center;
     text-align: center;
@@ -90,8 +99,17 @@ const BigText = styled.p`
 `;
 
 const MedText = styled.p`
-  font-size: 1.5rem;
+  margin: 0;
+  font-size: 1.3rem;
   font-weight: 300;
 `;
 
-export default TitleSection;
+const Link = styled.a`
+  font-weight: 400;
+  color: #cdcdff;
+  :hover {
+    color: #dbdbff;
+  }
+`;
+
+export default BioSection;
