@@ -7,6 +7,7 @@ npm run dev
 Building for deployment:
 
 ```bash
+npm run build
 npm run export
 ```
 

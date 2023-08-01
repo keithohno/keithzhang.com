@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import { PageSection } from "../../shared/PageSection";
-import { Github, Linkedin } from "../../shared/Icons";
+import { PageSection } from "../shared/PageSection";
+import { Github, Linkedin } from "../shared/Icons";
 
 const BioSection: React.FC = () => {
   return (
