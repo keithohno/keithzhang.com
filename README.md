@@ -13,6 +13,9 @@ npm run export
 
 Deployment:
 
+Copy secure data into `private/keyth-aws.pem` and `private/hosts`
+
 ```bash
-ansible-playbook ansible/deploy.yml
+cd ansible
+ansible-playbook deploy.yml
 ```
