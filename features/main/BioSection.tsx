@@ -34,6 +34,9 @@ const BioSection: React.FC = () => {
                 <Linkedin />
               </IconButton>
             </a>
+            <a href="Keith_Zhang_Resume.pdf">
+              <ResumeButton>Resume</ResumeButton>
+            </a>
           </SocialIcons>
         </Bio>
       </Root>
@@ -89,6 +92,23 @@ const IconButton = styled.div`
   :hover {
     transform: scale(1.1);
     border-bottom: 2px solid #e5e5e0;
+  }
+`;
+
+const ResumeButton = styled.div`
+  height: 2rem;
+  margin-left: 0.5rem;
+  padding: 0 0.5rem 2px 0.5rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e5e5e0;
+  color: #07182a;
+  font-weight: 700;
+  transition: all 0.2s ease-in-out;
+  :hover {
+    transform: scale(1.1);
   }
 `;
 
