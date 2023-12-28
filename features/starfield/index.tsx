@@ -1,35 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-import { ReadonlyVec3, mat4, vec3 } from "gl-matrix";
+import { mat4, vec3 } from "gl-matrix";
 import styled from "@emotion/styled";
 
 import { loadShaderProgram } from "./shaders";
 import { useStarfield } from "./context";
 import { useGl } from "./hooks";
-import { colorCodeToRGBValues } from "./utils";
-
-const DISTANCE_MOD = 1 / 100000;
+import { parseStarData } from "./utils";
 
 const initBuffers = async (gl: WebGLRenderingContext) => {
-  // fetch binary data
-  let positionData: number[] = [];
-  let sizeData: number[] = [];
-  let colorData: number[] = [];
-  const res = await (await (await fetch("BSC5ra-small")).blob()).arrayBuffer();
-  // read binary star data from file
-  for (let i = 0; i < res.byteLength; i += 23) {
-    const r_ascension = new Float64Array(res.slice(i, i + 8))[0];
-    const declination = new Float64Array(res.slice(i + 8, i + 16))[0];
-    let distance =
-      new Float32Array(res.slice(i + 16, i + 20))[0] * DISTANCE_MOD;
-    positionData.push(distance * Math.cos(r_ascension) * Math.cos(declination));
-    positionData.push(distance * Math.sin(r_ascension) * Math.cos(declination));
-    positionData.push(distance * Math.sin(declination));
-    let sizes = new Int16Array(res.slice(i + 20, i + 22));
-    sizeData.push((sizes[0] - 600) / 6);
-    // color by stellar classification
-    const colorCode = new Uint8Array(res.slice(i + 22, i + 23))[0];
-    colorData.push(...colorCodeToRGBValues(colorCode));
-  }
+  // fetch and parse binary data
+  const starDataRaw = await (
+    await (await fetch("BSC5ra-small")).blob()
+  ).arrayBuffer();
+  const { positionData, sizeData, colorData } = parseStarData(starDataRaw);
 
   // load data into buffers
   const positions = gl.createBuffer()!;

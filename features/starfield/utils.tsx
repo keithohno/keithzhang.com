@@ -1,5 +1,9 @@
-export const colorCodeToRGBValues = (colorCode: number) => {
-  // color by stellar classification
+const DISTANCE_MOD = 1 / 100000;
+
+/**
+ * Converts a color code (0-255 corresponding to ASCII char) to an RGB value.
+ */
+function colorCodeToRGBValues(colorCode: number) {
   switch (colorCode) {
     case 77:
       return [1.0, 0.5, 0.3];
@@ -23,4 +27,33 @@ export const colorCodeToRGBValues = (colorCode: number) => {
     default:
       return [0.9, 0.9, 0.9];
   }
-};
+}
+
+/**
+ * Extracts position, size, and color data from an array buffer.
+ * The data format is specified in scripts/extract.py
+ */
+export function parseStarData(data: ArrayBuffer) {
+  let positionData: number[] = [];
+  let sizeData: number[] = [];
+  let colorData: number[] = [];
+  for (let i = 0; i < data.byteLength; i += 23) {
+    // position
+    const r_ascension = new Float64Array(data.slice(i, i + 8))[0];
+    const declination = new Float64Array(data.slice(i + 8, i + 16))[0];
+    let distance =
+      new Float32Array(data.slice(i + 16, i + 20))[0] * DISTANCE_MOD;
+    positionData.push(distance * Math.cos(r_ascension) * Math.cos(declination));
+    positionData.push(distance * Math.sin(r_ascension) * Math.cos(declination));
+    positionData.push(distance * Math.sin(declination));
+
+    // size
+    let sizes = new Int16Array(data.slice(i + 20, i + 22));
+    sizeData.push((sizes[0] - 600) / 6);
+
+    // color
+    const colorCode = new Uint8Array(data.slice(i + 22, i + 23))[0];
+    colorData.push(...colorCodeToRGBValues(colorCode));
+  }
+  return { positionData, sizeData, colorData };
+}
