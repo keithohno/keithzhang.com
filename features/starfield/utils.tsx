@@ -1,5 +1,7 @@
 const DISTANCE_MOD = 1 / 100000;
 const BYTES_PER_STAR = 23;
+const STAR_SIZE_SHIFT = -590;
+const STAR_SIZE_MULTI = 1 / 6;
 
 /**
  * Converts a color code (0-255 corresponding to ASCII char) to an RGB value.
@@ -52,7 +54,7 @@ export function parseStarData(data: ArrayBuffer) {
 
     // size
     let sizes = new Int16Array(data.slice(i + 20, i + 22));
-    sizeData.push((sizes[0] - 600) / 6);
+    sizeData.push((sizes[0] + STAR_SIZE_SHIFT) * STAR_SIZE_MULTI);
 
     // color
     const colorCode = new Uint8Array(data.slice(i + 22, i + 23))[0];
