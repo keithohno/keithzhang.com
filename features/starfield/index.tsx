@@ -12,7 +12,8 @@ const initBuffers = async (gl: WebGLRenderingContext) => {
   const starDataRaw = await (
     await (await fetch("BSC5ra-small")).blob()
   ).arrayBuffer();
-  const { positionData, sizeData, colorData } = parseStarData(starDataRaw);
+  const { starCount, positionData, sizeData, colorData } =
+    parseStarData(starDataRaw);
 
   // load data into buffers
   const positions = gl.createBuffer()!;
@@ -28,13 +29,14 @@ const initBuffers = async (gl: WebGLRenderingContext) => {
   const colors = gl.createBuffer()!;
   gl.bindBuffer(gl.ARRAY_BUFFER, colors);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colorData), gl.STATIC_DRAW);
-  return { positions, sizes, colors };
+  return { starCount, positions, sizes, colors };
 };
 
 function drawScene(
   gl: WebGLRenderingContext,
   uniforms: any,
   buffer: { positions: WebGLBuffer; sizes: WebGLBuffer; colors: WebGLBuffer },
+  starCount: number,
   orientation: mat4,
   offsets: vec3,
   fov: number
@@ -80,7 +82,7 @@ function drawScene(
   gl.enableVertexAttribArray(2);
 
   // draw
-  gl.drawArrays(gl.POINTS, 0, 2000);
+  gl.drawArrays(gl.POINTS, 0, starCount);
 }
 
 const Starfield: React.FC = () => {
@@ -91,6 +93,7 @@ const Starfield: React.FC = () => {
     sizes: WebGLBuffer;
     colors: WebGLBuffer;
   }>();
+  const [starCount, setStarCount] = useState<number>(0);
 
   const {
     rotAxisX,
@@ -136,8 +139,9 @@ const Starfield: React.FC = () => {
     if (!gl) return;
 
     // buffer init
-    initBuffers(gl).then((res) => {
-      setBuffers(res);
+    initBuffers(gl).then(({ starCount, positions, sizes, colors }) => {
+      setBuffers({ positions, sizes, colors });
+      setStarCount(starCount);
     });
   }, [gl]);
 
@@ -166,6 +170,7 @@ const Starfield: React.FC = () => {
       gl,
       uniforms,
       buffers,
+      starCount,
       orientation,
       vec3.fromValues(offsetX, offsetY, -offsetZ),
       fov

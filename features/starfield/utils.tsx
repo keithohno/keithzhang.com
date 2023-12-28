@@ -1,4 +1,5 @@
 const DISTANCE_MOD = 1 / 100000;
+const BYTES_PER_STAR = 23;
 
 /**
  * Converts a color code (0-255 corresponding to ASCII char) to an RGB value.
@@ -37,7 +38,9 @@ export function parseStarData(data: ArrayBuffer) {
   let positionData: number[] = [];
   let sizeData: number[] = [];
   let colorData: number[] = [];
-  for (let i = 0; i < data.byteLength; i += 23) {
+  let starCount = data.byteLength / BYTES_PER_STAR;
+
+  for (let i = 0; i < data.byteLength; i += BYTES_PER_STAR) {
     // position
     const r_ascension = new Float64Array(data.slice(i, i + 8))[0];
     const declination = new Float64Array(data.slice(i + 8, i + 16))[0];
@@ -55,5 +58,5 @@ export function parseStarData(data: ArrayBuffer) {
     const colorCode = new Uint8Array(data.slice(i + 22, i + 23))[0];
     colorData.push(...colorCodeToRGBValues(colorCode));
   }
-  return { positionData, sizeData, colorData };
+  return { starCount, positionData, sizeData, colorData };
 }
