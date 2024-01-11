@@ -17,11 +17,11 @@ const BioSection: React.FC = () => {
             exciting opportunity, feel free to reach out!
           </MedText>
           <MedText>
-            Most recently, I've been{" "}
-            <Link href="https://github.com/keithohno/learning/tree/main/ml">
-              exploring GANs and VAEs for unsupervised learning
-            </Link>
-            .
+            Here's a{" "}
+            <Link href="http://daydreams.keithzhang.com">
+              somewhat random list
+            </Link>{" "}
+            of things I've been working on recently.
           </MedText>
           <SocialIcons>
             <a href="https://www.github.com/keithohno">
